@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cover from '../../assets/Images/cover.png'
 
 interface TeamMember {
@@ -26,15 +26,54 @@ const teamMembers: TeamMember[] = [
 ];
 
 const MiddleFive: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="bg-gray-50 py-10">
+    <div ref={sectionRef} className="bg-gray-50 py-10">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-800">Meet Our Team</h2>
-        <p className="text-gray-500 mt-2">We are champions of participatory approaches to problem solving.</p>
+        <h2 className={`text-3xl font-bold text-gray-800 transition-all duration-1000 ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+        }`}>
+          Meet Our Team
+        </h2>
+        <p className={`text-gray-500 mt-2 transition-all duration-1000 ease-out delay-300 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
+          We are champions of participatory approaches to problem solving.
+        </p>
       </div>
       <div className="flex justify-center mt-8 space-x-8">
         {teamMembers.map((member, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-6 max-w-xs text-center">
+          <div 
+            key={index} 
+            className={`bg-white shadow-md rounded-lg p-6 max-w-xs text-center transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+            }`}
+            style={{ transitionDelay: `${600 + index * 200}ms` }}
+          >
             <img
               src={member.imgSrc}
               alt={member.name}

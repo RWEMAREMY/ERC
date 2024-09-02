@@ -8,10 +8,11 @@ import MiddleThree from './components/Body/SubBodyOne/MiddleThree';
 import MiddleFour from './components/Body/MiddleFour';
 import MiddleFive from './components/Body/MiddleFive';
 import MiddleSix from './components/Body/MiddleSix';
+import './index.css';
 function App() {
 
   return (
-    <div>
+    <div className="font-sans">
     <Header />
     <MiddleOne />
     <MiddleTwo />

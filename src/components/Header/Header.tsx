@@ -1,22 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
-const HeroSection: React.FC = () => {
+
+const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
 
   const toggleMenu = () => {
-    console.log("Menu toggled", !menuOpen); // Debugging log
+    console.log("Menu toggled", !menuOpen);
     setMenuOpen(!menuOpen);
   };
 
   return (
-    <div className="relative h-screen bg-[#043873] text-white">
+    <div className="relative h-screen bg-[#043873] text-white overflow-hidden">
       {/* Header */}
       <header className="flex justify-between items-center p-4">
         <div className="flex gap-5">
           <button className="text-white cursor-pointer hover:bg-blue-700" onClick={toggleMenu}>
             {/* Menu Icon */}
             <svg
-              className="w-8 h-8 -mt-10"
+              className={`w-8 h-8 -mt-10 transition-transform duration-500 ${animate ? 'translate-x-0' : '-translate-x-full'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -33,101 +39,48 @@ const HeroSection: React.FC = () => {
           <img
             src={Logo}
             alt="Profile"
-            className="w-22 h-24"
+            className={`w-22 h-24 transition-opacity duration-1000 ${animate ? 'opacity-100' : 'opacity-0'}`}
           />
         </div>
 
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer -mt-10"
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer -mt-10 transition-all duration-500 ${
+            animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+          }`}
           onClick={() => alert("Login clicked")}
         >
           Login
         </button>
       </header>
 
-      {/* Menu */}
-      {menuOpen && (
-        <div className="absolute top-0 left-0 w-full h-full bg-blue-900 flex flex-col items-start p-4 space-y-4 z-50">
-          <button className="text-white cursor-pointer" onClick={toggleMenu}>
-            {/* Close Icon */}
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
-          <a
-            href="#"
-            className="text-white bg-blue-500 p-2 rounded cursor-pointer"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="text-white bg-blue-500 p-2 rounded cursor-pointer"
-          >
-            About Us
-          </a>
-          <div className="relative">
-            <a
-              href="#"
-              className="text-white bg-blue-500 p-2 rounded cursor-pointer"
-            >
-              Services
-            </a>
-            <div className="absolute left-full top-0 bg-blue-500 text-white p-2 rounded mt-2">
-              <a href="#" className="block p-2 cursor-pointer">
-                Service 1
-              </a>
-              <a href="#" className="block p-2 cursor-pointer">
-                Service 2
-              </a>
-              <a href="#" className="block p-2 cursor-pointer">
-                Service 3
-              </a>
-            </div>
-          </div>
-          <a
-            href="#"
-            className="text-white bg-blue-500 p-2 rounded cursor-pointer"
-          >
-            Publications
-          </a>
-          <a
-            href="#"
-            className="text-white bg-blue-500 p-2 rounded cursor-pointer"
-          >
-            Reach Us
-          </a>
-        </div>
-      )}
-
       {/* Main Content */}
       <div className="flex flex-col justify-center items-start px-8 space-y-6 ml-10 mt-20">
-        <h1 className="text-8xl font-bold pt-10">Econometer</h1>
-        <h1 className="text-6xl font-bold">Research Center Consultants</h1>
-        <p className="text-lg max-w-xl">
+        <h1 className={`text-8xl font-bold pt-10 transition-all duration-1000 ${
+          animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+        }`}>
+          Econometer
+        </h1>
+        <h1 className={`text-6xl font-bold transition-all duration-1000 delay-300 ${
+          animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+        }`}>
+          Research Center Consultants
+        </h1>
+        <p className={`text-lg max-w-xl transition-all duration-1000 delay-500 ${
+          animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        }`}>
           ERC's mission is to work in the direction of accelerating the time to
           value and maximize the investment of our clients around the world.
         </p>
         <button
-          className="mt-4 bg-[#F64D05] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer opacity-100 h-20 w-18"
+          className={`mt-4 bg-[#F64D05] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer opacity-100 h-20 w-18 transition-all duration-1000 delay-700 ${
+            animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+          }`}
           onClick={() => alert("Get in touch clicked")}
         >
           Get in touch →
         </button>
       </div>
 
-      {/* Background Wave */}
       <div className="absolute inset-0 flex items-center justify-center">
         <svg
           width="1440"
@@ -292,4 +245,4 @@ const HeroSection: React.FC = () => {
   );
 };
 
-export default HeroSection;
+export default Header;
