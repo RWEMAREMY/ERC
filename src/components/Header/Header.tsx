@@ -2,6 +2,29 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Element from "../../assets/Icons/Element";
 
+const useTypingEffect = (text: string, typingSpeed: number = 50) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, typingSpeed);
+      return () => clearTimeout(timeout);
+    } else {
+      // Reset when finished
+      setTimeout(() => {
+        setDisplayedText('');
+        setCurrentIndex(0);
+      }, 2000); // Wait 2 seconds before restarting
+    }
+  }, [text, currentIndex, typingSpeed]);
+
+  return displayedText;
+};
+
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -9,6 +32,9 @@ const Header: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const paragraphText = "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
+  const displayedText = useTypingEffect(paragraphText, 30);
 
   useEffect(() => {
     setAnimate(true);
@@ -81,9 +107,7 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
             <button
-              className={`hover:bg-[#F64D05] text-white p-2 rounded-full transition-all duration-500 ${
-                animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-              }`}
+              className={`hover:bg-[#F64D05] text-white p-2 rounded-full transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
               onClick={toggleSearch}
               aria-label="Search"
             >
@@ -105,9 +129,7 @@ const Header: React.FC = () => {
             )}
           </div>
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer transition-all duration-500 ${
-              animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-            }`}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
             onClick={() => alert("Login clicked")}
           >
             Login
@@ -116,10 +138,8 @@ const Header: React.FC = () => {
       </header>
 
       {/* Slide-in Menu */}
-      <div 
-        className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+      <div
+        className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="p-10 text-white">
           <nav className="mt-16">
@@ -148,51 +168,37 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-
       {/* Main Content */}
       <div className="flex flex-col justify-center items-start px-8 space-y-6 ml-10 mt-20 relative z-10">
-        <h1 className={`text-8xl font-bold pt-10 transition-all duration-1000 ${
-          animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-        }`}>
+        <h1 className={`text-8xl font-bold pt-10 transition-all duration-1000 ${animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
           Econometer
         </h1>
-        <h1 className={`text-6xl font-bold transition-all duration-1000 delay-300 ${
-          animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-        }`}>
+        <h1 className={`text-6xl font-bold transition-all duration-1000 delay-300 ${animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
           Research Center Consultants
         </h1>
-        <p className={`text-lg max-w-xl transition-all duration-1000 delay-500 ${
-          animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-        }`}>
-          ERC's mission is to work in the direction of accelerating the time to
-          value and maximize the investment of our clients around the world.
+        <p className="text-lg max-w-xl h-20 typing-cursor">
+          {displayedText}
         </p>
 
         <div className="flex justify-between w-full mt-8">
           <button
-            className={`bg-[#F64D05] hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${
-              animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-            }`}
+            className={`bg-[#F64D05] hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
             onClick={() => alert("Get in touch clicked")}
           >
             Get in touch →
           </button>
 
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${
-              animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-            }`}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
             onClick={() => alert("Book Appointment clicked")}
           >
             BOOK APPOINTMENT NOW
           </button>
         </div>
-
       </div>
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Element />
       </div>
-
     </div>
   );
 };

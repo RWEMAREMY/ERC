@@ -36,11 +36,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, lin
   }, []);
 
   return (
-    <div 
+    <div
       ref={cardRef}
-      className={`bg-[#043873] text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`bg-[#043873] hover:bg-blue-600 cursor-pointer text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="text-4xl mb-4">{icon}</div>
@@ -50,7 +49,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, lin
           <li key={index}>{line}</li>
         ))}
       </ul>
-      <button onClick={onReadMore} className="text-blue-400 hover:text-blue-600">
+      <button onClick={onReadMore} className="text-orange-400 -ml-24 hover:text-[#043873]">
         {linkText}
       </button>
     </div>
@@ -76,7 +75,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, title, description }) =>
             <li key={index} className="mb-2">{line}</li>
           ))}
         </ul>
-        <button 
+        <button
           onClick={onClose}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
         >
@@ -121,38 +120,39 @@ const MiddleOne: React.FC = () => {
   return (
     <section ref={sectionRef} className="bg-white py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className={`text-3xl font-bold mb-4 transition-all duration-1000 ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
-        }`}>
+        <h2 className={`text-3xl font-bold mb-4 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+          }`}>
           WHY CHOOSE US
         </h2>
-        <p className={`text-gray-600 mb-12 transition-all duration-1000 ease-out delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <p className={`text-gray-600 mb-12 transition-all duration-1000 ease-out delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           Our expertise aims to tackle challenges with innovative methods and help our partners to make a successful decision.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className='transition-all duration-300 ease-in-out transform rounded-lg hover:scale-105'>
+            <ServiceCard
+              title="Advice"
+              icon={<i className="fas fa-user-friends"></i>}
+              description={[
+                "The best products start with Figma",
+                "Design with real data",
+                "Lightning fast prototyping",
+                "Fastest way to organize",
+                "Work at the speed of thought."
+              ]}
+              linkText="Read More"
+              delay={0}
+              onReadMore={() => handleReadMore("Advice", [
+                "The best products start with Figma",
+                "Design with real data",
+                "Lightning fast prototyping",
+                "Fastest way to organize",
+                "Work at the speed of thought."
+              ])}
+            />
+          </div>
+          <div className='transition-all duration-300 ease-in-out transform hover:scale-105'>
           <ServiceCard
-            title="Advice"
-            icon={<i className="fas fa-user-friends"></i>}
-            description={[
-              "The best products start with Figma",
-              "Design with real data",
-              "Lightning fast prototyping",
-              "Fastest way to organize",
-              "Work at the speed of thought."
-            ]}
-            linkText="Read More"
-            delay={0}
-            onReadMore={() => handleReadMore("Advice", [
-              "The best products start with Figma",
-              "Design with real data",
-              "Lightning fast prototyping",
-              "Fastest way to organize",
-              "Work at the speed of thought."
-            ])}
-          />
-           <ServiceCard
             title="Analysis"
             icon={<i className="fas fa-award"></i>}
             description={[
@@ -164,7 +164,7 @@ const MiddleOne: React.FC = () => {
             ]}
             linkText="Read More"
             delay={200}
-            onReadMore={() => handleReadMore("Advice", [
+            onReadMore={() => handleReadMore("Analysis", [
               "The best products start with Figma",
               "Design with real data",
               "Lightning fast prototyping",
@@ -172,6 +172,9 @@ const MiddleOne: React.FC = () => {
               "Work at the speed of thought."
             ])}
           />
+          </div>
+          <div className='transition-all duration-300 ease-in-out transform rounded-lg hover:scale-105'>
+
           <ServiceCard
             title="Data collection"
             icon={<i className="fas fa-file-alt"></i>}
@@ -192,6 +195,8 @@ const MiddleOne: React.FC = () => {
               "Work at the speed of thought."
             ])}
           />
+          </div>
+          <div className='transition-all duration-300 ease-in-out transform rounded-lg hover:scale-105'>
           <ServiceCard
             title="Data mining"
             icon={<i className="fas fa-user-friends"></i>}
@@ -212,6 +217,7 @@ const MiddleOne: React.FC = () => {
               "Work at the speed of thought."
             ])}
           />
+          </div>
         </div>
       </div>
       <Popup
