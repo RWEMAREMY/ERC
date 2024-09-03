@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.text-lg.max-w-xl.h-20 {
+  min-height: 5rem;
+  line-height: 1.5;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.typing-cursor::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+}

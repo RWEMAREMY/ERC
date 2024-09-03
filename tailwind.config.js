@@ -6,16 +6,12 @@ export const theme = {
   extend: {
       animation: {
         marquee: 'marquee 25s linear infinite',
-        marquee2: 'marquee2 25s linear infinite',
+        marquee2: 'marquee2 35s linear infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        marquee2: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
+          '80%': { transform: 'translateX(-80%)' },
         },
       },
       fontFamily: {

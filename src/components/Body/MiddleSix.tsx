@@ -29,8 +29,8 @@ const MiddleSix: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="relative bg-cover bg-center h-screen" style={{ backgroundImage: `url(${cover})` }}>
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
+      <div className="absolute inset-0 bg-gray-900 bg-opacity-50 "></div>
+      <div className="relative z-10 flex flex-col items-center  h-full text-center text-white mt-4">
         <h2 className={`text-lg font-bold transition-all duration-1000 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
         }`}>Contact Us</h2>
