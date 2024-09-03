@@ -44,24 +44,24 @@ const MiddleSix: React.FC = () => {
             <input
               type="text"
               placeholder="Full Name"
-              className="w-1/2 p-4 rounded bg-gray-200 text-gray-800 focus:outline-none"
+              className="w-1/2 p-4 rounded bg-white text-gray-800 focus:outline-none"
             />
             <input
               type="email"
               placeholder="example@gmail.com"
-              className="w-1/2 p-4 rounded bg-gray-200 text-gray-800 focus:outline-none"
+              className="w-1/2 p-4 rounded bg-white text-gray-800 focus:outline-none"
             />
           </div>
           <div className="flex space-x-4 mt-4">
           <input
               type="text"
               placeholder="Company Name"
-              className="w-full p-4 rounded bg-gray-200 text-gray-800 focus:outline-none"
+              className="w-full p-4 rounded bg-white text-gray-800 focus:outline-none"
             />
           </div>
           <textarea
             placeholder="Message"
-            className="w-full p-4 mt-4 rounded bg-gray-200 text-gray-800 focus:outline-none"
+            className="w-full p-4 mt-4 rounded bg-white text-gray-800 focus:outline-none"
             rows={4}
           ></textarea>
           <button

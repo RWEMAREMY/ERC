@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-blue-900 text-white py-8">
+    <footer ref={footerRef} className="bg-[#043873] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           {/* Logo Section */}
