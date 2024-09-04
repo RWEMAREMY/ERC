@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Element from "../../assets/Icons/Element";
-
+import Layout from "../../pages/Layout";
 const useTypingEffect = (text: string, typingSpeed: number = 50) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,11 +14,10 @@ const useTypingEffect = (text: string, typingSpeed: number = 50) => {
       }, typingSpeed);
       return () => clearTimeout(timeout);
     } else {
-      // Reset when finished
       setTimeout(() => {
         setDisplayedText('');
         setCurrentIndex(0);
-      }, 2000); // Wait 2 seconds before restarting
+      }, 2000); 
     }
   }, [text, currentIndex, typingSpeed]);
 
@@ -27,7 +26,6 @@ const useTypingEffect = (text: string, typingSpeed: number = 50) => {
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,12 +46,6 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-    setServicesOpen(false);
-  };
-
-  const toggleServices = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setServicesOpen(!servicesOpen);
   };
 
   const toggleSearch = () => {
@@ -141,31 +133,7 @@ const Header: React.FC = () => {
       <div
         className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="p-10 text-white">
-          <nav className="mt-16">
-            <ul className="space-y-7">
-              <li><a href="#" className="text-2xl font-bold hover:text-blue-200">Home</a></li>
-              <li><a href="#" className="text-2xl font-bold hover:text-blue-200">About Us</a></li>
-              <li>
-                <button onClick={toggleServices} className="text-2xl font-bold hover:text-blue-200 flex items-center">
-                  Services
-                  <svg className={`w-4 h-4 ml-2 transform ${servicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                {servicesOpen && (
-                  <ul className="ml-4 mt-2 space-y-2">
-                    <li><a href="#" className="text-xl hover:text-blue-200">Service 1</a></li>
-                    <li><a href="#" className="text-xl hover:text-blue-200">Service 2</a></li>
-                    <li><a href="#" className="text-xl hover:text-blue-200">Service 3</a></li>
-                  </ul>
-                )}
-              </li>
-              <li><a href="#" className="text-2xl font-bold hover:text-blue-200">Publications</a></li>
-              <li><a href="#" className="text-2xl font-bold hover:text-blue-200">Reach Us</a></li>
-            </ul>
-          </nav>
-        </div>
+      <Layout />
       </div>
 
       {/* Main Content */}

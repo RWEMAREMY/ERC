@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../../../assets/Images/Avater.png'
+import Avatar from '../../assets/Images/Avater.png'
 
 const MiddleThree: React.FC = () => {
   return (

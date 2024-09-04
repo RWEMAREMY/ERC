@@ -1,28 +1,29 @@
+// import ReactDom from "react-dom/client"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./index.css";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Reachus from "./pages/Reachus";
+import NoPage from "./pages/NoPage";
+import Publications from "./pages/Publications";
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer';
-import MiddleOne from './components/Body/MiddleOne'
-import MiddleTwo from './components/Body/MiddleTwo';
-import MiddleThree from './components/Body/SubBodyOne/MiddleThree';
-import MiddleFour from './components/Body/MiddleFour';
-import MiddleFive from './components/Body/MiddleFive';
-import MiddleSix from './components/Body/MiddleSix';
-import './index.css';
 function App() {
-
   return (
-    <div className="font-sans">
-    <Header />
-    <MiddleOne />
-    <MiddleTwo />
-    <MiddleThree />
-    <MiddleFour />
-    <MiddleFive />
-    <MiddleSix />
-    <Footer />
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="services" element={<Services />} />
+        <Route path="publications" element={<Publications />} />
+        <Route path="reachus" element={<Reachus />} />
+        <Route path="*" element={<NoPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
