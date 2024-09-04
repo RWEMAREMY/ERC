@@ -40,6 +40,36 @@ const AnimatedSection: React.FC<{ children: React.ReactNode; delay: number }> = 
   );
 };
 
+const TestimonialCard: React.FC<{ delay: number }> = ({ delay }) => (
+  <AnimatedSection delay={delay}>
+    <div className="bg-white shadow-lg rounded-lg p-6 text-left w-80 transform perspective-1000 hover:scale-105 hover:rotate-y-5 hover:rotate-x-5 transition-transform duration-300" style={{ transformStyle: 'preserve-3d' }}>
+      <div className="text-blue-900 mb-4 transform translate-z-20">
+        <div className="flex">
+          <span className="text-xl">★</span>
+          <span className="text-xl">★</span>
+          <span className="text-xl">★</span>
+          <span className="text-xl">★</span>
+          <span className="text-xl text-gray-400">★</span>
+        </div>
+      </div>
+      <p className="text-gray-700 mb-8 transform translate-z-20">
+        Slate helps you see how many more days you need to work to reach your financial goal.
+      </p>
+      <div className="flex items-center transform translate-z-20">
+        <img
+          src={Ellipse}
+          alt="Profile"
+          className="w-12 h-12 rounded-full mr-4"
+        />
+        <div>
+          <p className="font-bold text-blue-900">Regina Miles</p>
+          <p className="text-sm text-gray-600">Designer</p>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+);
+
 const MiddleFour: React.FC = () => {
   return (
     <section className="py-16 bg-white">
@@ -53,93 +83,10 @@ const MiddleFour: React.FC = () => {
           </p>
         </AnimatedSection>
 
-        <div className="flex justify-center space-x-4">
-          {/* Card 1 */}
-          <AnimatedSection delay={600}>
-            <div className="bg-white shadow-lg rounded-lg p-6 text-left w-80">
-              <div className="text-blue-900 mb-4">
-                <div className="flex">
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl text-gray-400">★</span>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-8">
-                Slate helps you see how many more days you need to work to reach your financial goal.
-              </p>
-              <div className="flex items-center">
-                <img
-                  src={Ellipse}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold text-blue-900">Regina Miles</p>
-                  <p className="text-sm text-gray-600">Designer</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Card 2 */}
-          <AnimatedSection delay={800}>
-          <div className="bg-white shadow-lg rounded-lg p-6 text-left w-80">
-              <div className="text-blue-900 mb-4">
-                <div className="flex">
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl text-gray-400">★</span>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-8">
-                Slate helps you see how many more days you need to work to reach your financial goal.
-              </p>
-              <div className="flex items-center">
-                <img
-                  src={Ellipse}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold text-blue-900">Regina Miles</p>
-                  <p className="text-sm text-gray-600">Designer</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Card 3 */}
-          <AnimatedSection delay={1000}>
-          <div className="bg-white shadow-lg rounded-lg p-6 text-left w-80">
-              <div className="text-blue-900 mb-4">
-                <div className="flex">
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl">★</span>
-                  <span className="text-xl text-gray-400">★</span>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-8">
-                Slate helps you see how many more days you need to work to reach your financial goal.
-              </p>
-              <div className="flex items-center">
-                <img
-                  src={Ellipse}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold text-blue-900">Regina Miles</p>
-                  <p className="text-sm text-gray-600">Designer</p>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
+        <div className="flex justify-center space-x-4 flex-wrap gap-10">
+          <TestimonialCard delay={600} />
+          <TestimonialCard delay={800} />
+          <TestimonialCard delay={1000} />
         </div>
       </div>
     </section>

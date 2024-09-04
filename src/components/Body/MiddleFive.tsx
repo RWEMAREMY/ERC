@@ -65,7 +65,7 @@ const MiddleFive: React.FC = () => {
           We are champions of participatory approaches to problem solving.
         </p>
       </div>
-      <div className="flex justify-center mt-8 space-x-8">
+      <div className="flex justify-center mt-8 space-x-8 flex-wrap gap-4">
         {teamMembers.map((member, index) => (
           <div 
             key={index} 
