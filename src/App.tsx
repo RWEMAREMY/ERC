@@ -1,4 +1,3 @@
-// import ReactDom from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.css";
