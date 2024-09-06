@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Element from "../../assets/Icons/Element";
 import Layout from "../../pages/Layout";
+import {useNavigate} from "react-router-dom"
 const useTypingEffect = (text: string, typingSpeed: number = 50) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
@@ -30,7 +30,12 @@ const Header: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
-
+  const navigate = useNavigate();
+  const handleLoginClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate('/login');
+  }
+  
   const paragraphText = "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
   const displayedText = useTypingEffect(paragraphText, 30);
 
@@ -121,8 +126,8 @@ const Header: React.FC = () => {
             )}
           </div>
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-            onClick={() => alert("Login clicked")}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+            onClick={handleLoginClick}
           >
             Login
           </button>

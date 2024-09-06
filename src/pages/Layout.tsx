@@ -1,12 +1,19 @@
 import { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 const Layout = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const navigate = useNavigate();
   const toggleServices = (e: React.MouseEvent) => {
     e.stopPropagation();
     setServicesOpen(!servicesOpen);
   };
+
+  const handlePublicationsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate('/', { state: { scrollToPublications: true } });
+  };
+
   return (
     <>
       <div className="p-10 text-white">
@@ -78,12 +85,13 @@ const Layout = () => {
               )}
             </li>
             <li>
-              <Link
-                to="/publications"
+              <a
+                href="#publications"
+                onClick={handlePublicationsClick}
                 className="text-2xl font-bold hover:text-blue-200"
               >
                 Publications
-              </Link>
+              </a>
             </li>
             <li>
               <Link

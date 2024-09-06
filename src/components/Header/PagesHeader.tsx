@@ -2,29 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Element from "../../assets/Icons/Element";
 import Layout from "../../pages/Layout";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const useTypingEffect = (text: string, typingSpeed: number = 50) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    } else {
-      setTimeout(() => {
-        setDisplayedText("");
-        setCurrentIndex(0);
-      }, 2000);
-    }
-  }, [text, currentIndex, typingSpeed]);
-
-  return displayedText;
-};
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,6 +11,11 @@ const Header: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const handleLoginClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate('/login');
+  }
 
   const location = useLocation();
   const getPageTitle = () => {
@@ -41,7 +25,7 @@ const Header: React.FC = () => {
       case "":
         return "Home";
       case "about":
-        return "About";
+        return "About Us";
       case "publications":
         return "Publications";
       case "rechus":
@@ -52,10 +36,6 @@ const Header: React.FC = () => {
         return path.charAt(0).toUpperCase() + path.slice(1);
     }
   };
-
-  const paragraphText =
-    "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
-  const displayedText = useTypingEffect(paragraphText, 30);
 
   useEffect(() => {
     setAnimate(true);
@@ -86,7 +66,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="relative h-screen bg-[#043873] text-white overflow-hidden h-1/2">
+    <div className="relative bg-[#043873] text-white overflow-hidden h-3/4">
       {/* Header */}
       <header className="flex justify-between items-center p-4 relative z-26">
         <div className="flex gap-5">
@@ -177,12 +157,12 @@ const Header: React.FC = () => {
             )}
           </div>
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer transition-all duration-500 ${
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate
                 ? "translate-y-0 opacity-100"
                 : "translate-y-full opacity-0"
             }`}
-            onClick={() => alert("Login clicked")}
+            onClick={handleLoginClick}
           >
             Login
           </button>
@@ -255,7 +235,6 @@ const Header: React.FC = () => {
         >
           {getPageTitle()}
         </h1>
-        <p className="text-lg max-w-xl h-20 typing-cursor">{displayedText}</p>
       </div>
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Element />

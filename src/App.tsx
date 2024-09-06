@@ -8,6 +8,7 @@ import Services from "./pages/Services";
 import Reachus from "./pages/Reachus";
 import NoPage from "./pages/NoPage";
 import Publications from "./pages/Publications";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="services" element={<Services />} />
         <Route path="publications" element={<Publications />} />
         <Route path="reachus" element={<Reachus />} />
+        <Route path="login" element={<Login />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
