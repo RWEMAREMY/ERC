@@ -25,11 +25,13 @@ const Header: React.FC = () => {
       case "":
         return "Home";
       case "about":
-        return "About Us";
+
+        return "About us";
+
       case "publications":
         return "Publications";
-      case "rechus":
-        return "Rechus";
+      case "reachus":
+        return "Reach us";
       case "services":
         return "Services";
       default:
