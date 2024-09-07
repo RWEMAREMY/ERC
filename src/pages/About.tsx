@@ -8,6 +8,13 @@ function About() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <main className="flex-grow items-center justify-center pt-10">
+      <div className="text-center">
+          <h2 className="text-3xl font-bold mb-4">About Us</h2>
+          <p className="max-w-2xl mx-auto">
+            Here you can add your about us content. This text will be centered
+            on the page with a maximum width for better readability.
+          </p>
       <main className="flex-grow bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto py-16 px-4">
           
@@ -76,6 +83,7 @@ function About() {
               )}
             </div>
           </div>
+
         </div>
       </main>
       <Footer />
