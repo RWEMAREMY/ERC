@@ -90,6 +90,7 @@ const MiddleOne: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [popupContent, setPopupContent] = useState<{ title: string; description: string[] } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -116,6 +117,8 @@ const MiddleOne: React.FC = () => {
   const handleReadMore = (title: string, description: string[]) => {
     setPopupContent({ title, description });
   };
+
+  
 
   return (
     <section ref={sectionRef} className="bg-white py-16">
