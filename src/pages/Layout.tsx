@@ -12,26 +12,7 @@ const Layout = () => {
 
   const handlePublicationsClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate("/", { state: { scrollToPublications: true } });
-  };
-
-  const services = [
-    { name: "Advice", slug: "advice" },
-    { name: "Analysis", slug: "analysis" },
-    { name: "Data Collection & Management", slug: "dataCollectionManagement" },
-    { name: "Data Mining", slug: "dataMining" },
-    { name: "Design", slug: "design" },
-    { name: "Innovation & Research", slug: "innovationResearch" },
-    { name: "Modelling", slug: "modelling" },
-    { name: "Prediction", slug: "prediction" },
-    { name: "Qualitative Analysis", slug: "qualitativeAnalysis" },
-    { name: "Reporting", slug: "reporting" },
-    { name: "Review", slug: "review" }
-  ];
-
-  const handleServiceClick = (slug: string) => {
-    navigate(`/services`, { state: { selectedService: slug } });
-    setServicesOpen(false);
+    navigate("/#pub", { state: { scrollToPublications: true } });
   };
 
   return (
@@ -78,17 +59,11 @@ const Layout = () => {
               {servicesOpen && (
                 <div className="absolute left-[20%] -top-36 ml-4 p-6 rounded-lg shadow-lg w-[800px]">
                   <h3 className="text-xl font-bold mb-4 text-blue-300">Our Services</h3>
-                  <ul className="grid grid-cols-3 gap-4">
-                    {services.map((service, index) => (
-                      <li key={index} className="mb-2">
-                        <button
-                          onClick={() => handleServiceClick(service.slug)}
-                          className="text-lg hover:text-blue-300 transition-colors duration-200"
-                        >
-                          {service.name}
-                        </button>
-                      </li>
-                    ))}
+                  <ul className="grid grid-cols-2 gap-2">
+                    <li><Link to="/research">Market Research</Link></li>
+                    <li><Link to="/monitoring">Monitoring, Evaluation & Learning</Link></li>
+                    <li><Link to="/policy">Advise policy Makers</Link></li>
+                    <li><Link to="/program">Programmatic Work</Link></li>
                   </ul>
                 </div>
               )}
@@ -107,7 +82,7 @@ const Layout = () => {
                 to="/reachus"
                 className="text-2xl font-bold hover:text-blue-200"
               >
-                Reach Us
+                Connect with us
               </Link>
             </li>
           </ul>

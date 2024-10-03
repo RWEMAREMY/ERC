@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
-import Element from "../../assets/Icons/Element";
 import Layout from "../../pages/Layout";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate, NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,10 +10,11 @@ const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/login');
-  }
+    navigate("/login");
+  };
 
   const location = useLocation();
   const getPageTitle = () => {
@@ -25,13 +24,11 @@ const Header: React.FC = () => {
       case "":
         return "Home";
       case "about":
-
         return "About us";
-
       case "publications":
         return "Publications";
       case "reachus":
-        return "Reach us";
+        return "Connect with us";
       case "services":
         return "Services";
       default:
@@ -67,12 +64,31 @@ const Header: React.FC = () => {
     setSearchQuery("");
   };
 
+  const navItems = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    {
+      to: "/services",
+      label: "Services",
+      subItems: [
+        { to: "/research", label: "Market Research" },
+        { to: "/monitoring", label: "Monitoring, Evaluation & Learning" },
+        { to: "/policy", label: "Advise policy Makers" },
+        { to: "/program", label: "Programmatic Work" },
+      ],
+    },
+    { to: "/publications", label: "Publications" },
+    { to: "/reachus", label: "Connect with us" },
+  ];
+
   return (
     <div className="relative bg-[#043873] text-white overflow-hidden h-3/4">
-      {/* Header */}
-      <header className="flex justify-between items-center p-4 relative z-26">
+      <header className="flex justify-between items-center p-4 relative z-20">
         <div className="flex gap-5">
-          <button className="text-white cursor-pointer" onClick={toggleMenu}>
+          <button
+            className="text-[#DF4E10] cursor-pointer"
+            onClick={toggleMenu}
+          >
             {menuOpen ? (
               <svg
                 className="w-8 h-8"
@@ -116,10 +132,56 @@ const Header: React.FC = () => {
           />
         </div>
 
+        <nav className="flex items-center">
+        <ul className="flex space-x-6">
+            {navItems.map((item) => (
+              <li key={item.to} className="relative">
+                {item.subItems ? (
+                  <div>
+                    <button
+                      className="text-white hover:text-[#DF4E10] transition-colors"
+                      onClick={() =>
+                        setServicesDropdownOpen(!servicesDropdownOpen)
+                      }
+                    >
+                      {item.label}
+                    </button>
+                    {servicesDropdownOpen && (
+                      <ul className="absolute left-0 mt-2 py-2 w-48 bg-[#043873] rounded-md shadow-xl">
+                        {item.subItems.map((subItem) => (
+                          <li key={subItem.to}>
+                            <NavLink
+                              to={subItem.to}
+                              className="block px-4 py-2 text-sm text-white hover:bg-[#0A4D8F] hover:text-[#DF4E10]"
+                            >
+                              {subItem.label}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : (
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `text-white hover:text-[#DF4E10] transition-colors ${
+                        isActive ? "font-bold" : ""
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )}
+              </li>
+            ))}
+          </ul>
+          </nav>
+
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
             <button
-              className={`hover:bg-[#F64D05] text-white p-2 rounded-full transition-all duration-500 ${
+              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 ${
                 animate
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0"
@@ -159,7 +221,7 @@ const Header: React.FC = () => {
             )}
           </div>
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
+            className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate
                 ? "translate-y-0 opacity-100"
                 : "translate-y-full opacity-0"
@@ -173,7 +235,7 @@ const Header: React.FC = () => {
 
       {/* Slide-in Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-4/6 bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 w-full h-auto bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -237,9 +299,6 @@ const Header: React.FC = () => {
         >
           {getPageTitle()}
         </h1>
-      </div>
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <Element />
       </div>
     </div>
   );

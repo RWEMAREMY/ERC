@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
-import Element from "../../assets/Icons/Element";
 import Layout from "../../pages/Layout";
-import {useNavigate} from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom";
+
 const useTypingEffect = (text: string, typingSpeed: number = 50) => {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
+        setDisplayedText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
       }, typingSpeed);
       return () => clearTimeout(timeout);
     } else {
       setTimeout(() => {
-        setDisplayedText('');
+        setDisplayedText("");
         setCurrentIndex(0);
-      }, 2000); 
+      }, 2000);
     }
   }, [text, currentIndex, typingSpeed]);
 
@@ -31,12 +31,15 @@ const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/login');
-  }
-  
-  const paragraphText = "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
+    navigate("/login");
+  };
+
+  const paragraphText =
+    "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
   const displayedText = useTypingEffect(paragraphText, 30);
 
   useEffect(() => {
@@ -67,19 +70,52 @@ const Header: React.FC = () => {
     setSearchQuery("");
   };
 
+  const navItems = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    {
+      to: "/services",
+      label: "Services",
+      subItems: [
+        { to: "/research", label: "Market Research" },
+        { to: "/monitoring", label: "Monitoring, Evaluation & Learning" },
+        { to: "/policy", label: "Advise policy Makers" },
+        { to: "/program", label: "Programmatic Work" },
+      ],
+    },
+    { to: "/publications", label: "Publications" },
+    { to: "/reachus", label: "Connect with us" },
+  ];
+
   return (
     <div className="relative h-screen bg-[#043873] text-white overflow-hidden">
-      {/* Header */}
+
       <header className="flex justify-between items-center p-4 relative z-20">
         <div className="flex gap-5">
-          <button className="text-white cursor-pointer" onClick={toggleMenu}>
+          <button
+            className="text-[#DF4E10] cursor-pointer"
+            onClick={toggleMenu}
+          >
             {menuOpen ? (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
               </svg>
             ) : (
               <svg
-                className={`w-8 h-8 transition-transform duration-500 ${animate ? 'translate-x-0' : '-translate-x-full'}`}
+                className={`w-8 h-8 transition-transform duration-500 ${
+                  animate ? "translate-x-0" : "-translate-x-full"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -97,23 +133,89 @@ const Header: React.FC = () => {
           <img
             src={Logo}
             alt="Profile"
-            className={`w-22 h-24 transition-opacity duration-1000 ${animate ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-22 h-24 transition-opacity duration-1000 ${
+              animate ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
+
+        <nav className="flex items-center">
+          <ul className="flex space-x-6">
+            {navItems.map((item) => (
+              <li key={item.to} className="relative">
+                {item.subItems ? (
+                  <div>
+                    <button
+                      className="text-white hover:text-[#DF4E10] transition-colors"
+                      onClick={() =>
+                        setServicesDropdownOpen(!servicesDropdownOpen)
+                      }
+                    >
+                      {item.label}
+                    </button>
+                    {servicesDropdownOpen && (
+                      <ul className="absolute left-0 mt-2 py-2 w-48 bg-[#043873] rounded-md shadow-xl">
+                        {item.subItems.map((subItem) => (
+                          <li key={subItem.to}>
+                            <NavLink
+                              to={subItem.to}
+                              className="block px-4 py-2 text-sm text-white hover:bg-[#0A4D8F] hover:text-[#DF4E10]"
+                            >
+                              {subItem.label}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : (
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `text-white hover:text-[#DF4E10] transition-colors ${
+                        isActive ? "font-bold" : ""
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
             <button
-              className={`hover:bg-[#F64D05] text-white p-2 rounded-full transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 ${
+                animate
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-full opacity-0"
+              }`}
               onClick={toggleSearch}
               aria-label="Search"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
               </svg>
             </button>
             {searchOpen && (
-              <form onSubmit={handleSearchSubmit} className="absolute right-10 top-full -mt-10">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="absolute right-10 top-full -mt-10"
+              >
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -126,7 +228,11 @@ const Header: React.FC = () => {
             )}
           </div>
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+            className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
+              animate
+                ? "translate-y-0 opacity-100"
+                : "translate-y-full opacity-0"
+            }`}
             onClick={handleLoginClick}
           >
             Login
@@ -134,43 +240,40 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Slide-in Menu */}
       <div
-        className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
-      <Layout />
+        <Layout />
       </div>
 
-      {/* Main Content */}
-      <div className="flex flex-col justify-center items-start px-8 space-y-6 ml-10 mt-20 relative z-10">
-        <h1 className={`text-8xl font-bold pt-10 transition-all duration-1000 ${animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
+      <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold transition-all duration-1000">
           Econometer
         </h1>
-        <h1 className={`text-6xl font-bold transition-all duration-1000 delay-300 ${animate ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
-          Research Center Consultants
-        </h1>
-        <p className="text-lg max-w-xl h-20 typing-cursor">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold transition-all duration-1000 border-b-4 rounded-b-sm">
+          Research Center
+        </h2>
+        <p className="text-base sm:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
           {displayedText}
         </p>
 
-        <div className="flex justify-between w-full mt-8">
+        <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
           <button
-            className={`bg-[#F64D05] hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+            className="bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-2 px-4 sm:py-3 sm:px-6 rounded-full cursor-pointer transition-all duration-500 text-sm sm:text-base"
             onClick={() => alert("Get in touch clicked")}
           >
             Get in touch →
           </button>
 
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full cursor-pointer transition-all duration-500 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+            className="bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-2 px-4 sm:py-3 sm:px-6 rounded-full cursor-pointer transition-all duration-500 text-sm sm:text-base"
             onClick={() => alert("Book Appointment clicked")}
           >
             BOOK APPOINTMENT NOW
           </button>
         </div>
-      </div>
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <Element />
       </div>
     </div>
   );

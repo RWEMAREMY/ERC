@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import cover from '../../assets/Images/cover-2.png'
+import React, { useEffect, useRef, useState } from "react";
+import cover from "../../assets/Images/cover-2.png";
 
 const MiddleSix: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,18 +28,36 @@ const MiddleSix: React.FC = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="relative bg-cover bg-center h-screen" style={{ backgroundImage: `url(${cover})` }}>
+    <div
+      ref={sectionRef}
+      className="relative bg-cover bg-center h-screen"
+      style={{ backgroundImage: `url(${cover})` }}
+    >
       <div className="absolute inset-0 bg-gray-900 bg-opacity-50 "></div>
-      <div className="relative z-10 flex flex-col justify-center  items-center text-center text-white pt-16">
-        <h2 className={`text-lg font-bold transition-all duration-1000 ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
-        }`}>Contact Us</h2>
-        <h1 className={`text-4xl font-extrabold mt-2 transition-all duration-1000 ease-out delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
-        }`}>Make an Appointment</h1>
-        <form className={`mt-8 max-w-xl w-full transition-all duration-1000 ease-out delay-500 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+      <div className="relative z-10 flex flex-col justify-center  items-center text-center text-white pt-16 h-4/6">
+        <h2
+          className={`text-lg font-bold transition-all duration-1000 ease-out ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-10"
+          }`}
+        >
+          Contact Us
+        </h2>
+        <h1
+          className={`text-4xl font-extrabold mt-2 transition-all duration-1000 ease-out delay-300 ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-10"
+          }`}
+        >
+          Make an Appointment
+        </h1>
+        <form
+          className={`mt-8 max-w-xl w-full transition-all duration-1000 ease-out delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <div className="flex space-x-4">
             <input
               type="text"
@@ -53,7 +71,7 @@ const MiddleSix: React.FC = () => {
             />
           </div>
           <div className="flex space-x-4 mt-4">
-          <input
+            <input
               type="text"
               placeholder="Company Name"
               className="w-full p-4 rounded bg-white text-gray-800 focus:outline-none"
@@ -72,14 +90,19 @@ const MiddleSix: React.FC = () => {
           </button>
         </form>
       </div>
-      <div className={`absolute bottom-0 w-full py-10 bg-white text-gray-800 transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}>
-        <div className='flex items-center justify-between px-10'>
-          <div className='text-left'>
-            <h2 className="text-2xl font-bold">Consulting Agency For Your Business</h2>
+      <div
+        className={`absolute bottom-0 w-full py-10 bg-white text-gray-800 transition-all duration-1000 ease-out ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <div className="flex items-center justify-between px-10">
+          <div className="text-left">
+            <h2 className="text-2xl font-bold">
+              Consulting Agency For Your Business
+            </h2>
             <p className="mt-2 text-gray-600">
-              Are you confident in how you present your statistical results and conclusions?
+              Are you confident in how you present your statistical results and
+              conclusions?
             </p>
           </div>
 

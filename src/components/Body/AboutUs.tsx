@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Values from "./Values"
+import { useState } from "react";
+import Values from "./Values";
 import MissionVision from "./MissionVision";
 import MiddleFive from "./MiddleFive";
 
@@ -10,11 +10,6 @@ function AboutUs() {
     <main className="flex-grow items-center justify-center pt-10 space-y-10">
       <section className="py-8 bg-white text-center">
         <div className="max-w-4xl mx-auto px-4">
-          {/* Title */}
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
-            Introduction
-          </h2>
-          {/* Subtitle */}
           <p className="text-gray-500 mb-8">
             We provide both technical assistance and statistical consultancy to
             our clients.
@@ -22,17 +17,30 @@ function AboutUs() {
           {/* Paragraphs */}
           <div className="space-y-8">
             <p className="text-left text-gray-700 leading-relaxed">
-              Statistical research underpins many of today’s scientific
-              breakthroughs in all areas of life. Select is dedicated to
-              remaining at the forefront when it comes to applying statistical
-              analysis to improve understanding and deliver practical benefits
-              and solutions. Whether you are a business developing new products,
-              or an academic embarking on a new area of research, our team can
-              help you develop novel statistical approaches to suit your needs.
-              Our analysts’ unique combination of research and consultancy
-              experience will help you deliver innovative solutions and stand
-              out from your competitors.
+              Econometer Research Center LTD (ERC) is a rapidly growing
+              Africa-based research and advisory firm, established in 2020.
+              Specializing in research, impact evaluation and policy advisory.
+              ERC delivers high-quality research and strategic services to
+              governments, businesses, and non-profit organizations. ERC uses
+              innovative tools and rigorous methodologies to drive
+              transformative outcomes across Africa.
             </p>
+            <h2 className="text-left">We specialize in:</h2>
+            <div className="flex gap-10">
+              <p className="text-left text-gray-700 leading-relaxed">
+                <ul className="list-disc list-inside">
+                  <li>Monitoring & Evaluation Framework Design</li>
+                  <li>Policy Analysis</li>
+                  <li>Professional Training</li>
+                </ul>
+              </p>
+              <p className="text-left text-gray-700 leading-relaxed">
+                <ul className="list-disc list-inside">
+                  <li>Feasibility and Diagnostic Studies</li>
+                  <li>Data Warehousing Services</li>
+                </ul>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -56,17 +64,11 @@ function AboutUs() {
             </div>
 
             <div className="p-8">
-              {activeTab === "mission" && (
-                <MissionVision />
-              )}
+              {activeTab === "mission" && <MissionVision />}
 
-              {activeTab === "team" && (
-                <MiddleFive />
-              )}
+              {activeTab === "team" && <MiddleFive />}
 
-              {activeTab === "values" && (
-                <Values />
-              )}
+              {activeTab === "values" && <Values />}
             </div>
           </div>
         </div>
