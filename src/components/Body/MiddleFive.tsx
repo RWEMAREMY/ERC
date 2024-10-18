@@ -1,27 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react';
-import cover from '../../assets/Images/cover.png'
+import cover from '../../assets/Images/gisa.jpg';
+import cover2 from '../../assets/Images/murenzi.jpg';
+import cover3 from '../../assets/Images/mics.jpg';
 
 interface TeamMember {
   name: string;
   role: string;
   imgSrc: string;
+  twitter?: string;
+  linkedin?: string;
+  instagram?: string;
+  
 }
 
 const teamMembers: TeamMember[] = [
   {
-    name: 'Fullname',
-    role: 'CO Founder',
-    imgSrc: cover,
-  },
-  {
-    name: 'Fullname',
-    role: 'Consultant',
-    imgSrc: cover,
-  },
-  {
-    name: 'Fullname',
+    name: 'RUTAGARAMA Ephrem',
     role: 'CEO',
     imgSrc: cover,
+    twitter: 'https://x.com/Ephremrutagaram',
+    linkedin:'https://www.linkedin.com/in/ephrem-rutagarama-267410a7/',
+    instagram:'https://www.instagram.com/gisa_ephrem/'
+  },
+  {
+    name: 'MURENZI Rafiki',
+    role: ' Managing Director',
+    imgSrc: cover2,
+    twitter: 'https://x.com/MurenziRafiki',
+    linkedin:'https://www.linkedin.com/in/rafiki-murenzi-a479aa109/',
+    instagram:'https://www.instagram.com/rafikimurenzi/'
+
+  },
+  {
+    name: 'MUNEZERO Michael',
+    role: 'Software Engineer',
+    imgSrc: cover3,
+    twitter: 'https://x.com/michel_munezero?t=pdy-4HJuauLeKPYw87xCFQ&s=08',
+    linkedin:'https://www.linkedin.com/in/munezero-michel-062187265/',
+    instagram:'https://www.instagram.com/michaeldev250/'
   },
 ];
 
@@ -77,18 +93,18 @@ const MiddleFive: React.FC = () => {
             <img
               src={member.imgSrc}
               alt={member.name}
-              className="w-full h-48 object-cover rounded-md mb-4"
+              className="w-full h-48 object-cover rounded-md mb-2"
             />
-            <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3>
+            <h3 className="font-semibold text-sm text-gray-800">{member.name}</h3>
             <p className="text-gray-600 mb-4">{member.role}</p>
             <div className="flex justify-center space-x-4">
-              <a href="#" className="text-blue-600 hover:text-blue-800">
-                <i className="fab fa-facebook"></i>
+              <a href={member.linkedin} className="text-blue-600 hover:text-blue-800">
+                <i className="fab fa-linkedin"></i>
               </a>
-              <a href="#" className="text-pink-600 hover:text-pink-800">
+              <a href={member.instagram} className="text-pink-600 hover:text-pink-800">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="#" className="text-blue-400 hover:text-blue-600">
+              <a href={member.twitter} className="text-blue-400 hover:text-blue-600">
                 <i className="fab fa-twitter"></i>
               </a>
             </div>

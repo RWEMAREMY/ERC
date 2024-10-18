@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -51,24 +52,24 @@ const Footer: React.FC = () => {
             <h2 className="font-bold mb-3">Company Info</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-yellow-400">
+                <Link to="/" className="hover:text-yellow-400">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400">
+                <Link to="/about" className="hover:text-yellow-400">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Services
-                </a>
+                <Link to="/publications" className="hover:text-yellow-400">
+                  publications
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400">
+                <Link to="/reachus" className="hover:text-yellow-400">
                   Reach us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -83,19 +84,24 @@ const Footer: React.FC = () => {
             <h2 className="font-bold mb-3">Resources</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Blog
-                </a>
+                <Link to="/research" className="hover:text-yellow-400">
+                  market research
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Guides & tutorials
-                </a>
+                <Link to="monitoring" className="hover:text-yellow-400">
+                  Monitoring,Evaluation &Learning
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Help center
-                </a>
+                <Link to="/policy" className="hover:text-yellow-400">
+                  Advice policy makers
+                </Link>
+              </li>
+              <li>
+                <Link to="/program" className="hover:text-yellow-400">
+                  programmatic Work
+                </Link>
               </li>
             </ul>
           </div>
@@ -107,22 +113,12 @@ const Footer: React.FC = () => {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h2 className="font-bold mb-3">Features</h2>
+            <h2 className="font-bold mb-3">Get in touch</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-yellow-400">
-                  About us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-yellow-400">
-                  Media kit
-                </a>
+                <Link to="/reachus" className="hover:text-yellow-400">
+                  reach us
+                </Link>
               </li>
             </ul>
           </div>
@@ -140,15 +136,6 @@ const Footer: React.FC = () => {
                 English
               </a>
             </div>
-            <a href="#" className="hover:text-yellow-400">
-              Terms & privacy
-            </a>
-            <a href="#" className="hover:text-yellow-400">
-              Security
-            </a>
-            <a href="#" className="hover:text-yellow-400">
-              Status
-            </a>
           </div>
 
           <div className="text-sm">&copy;2024.</div>

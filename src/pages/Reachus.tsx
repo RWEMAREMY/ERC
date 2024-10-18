@@ -157,7 +157,7 @@ function Reachus() {
                   </svg>
                   <div>
                     <p className="font-semibold text-sm">Phone</p>
-                    <p className="text-blue-600">111 111 111</p>
+                    <p className="text-blue-600">+250788392152</p>
                   </div>
                 </div>
 
@@ -176,32 +176,13 @@ function Reachus() {
                   </svg>
                   <div>
                     <p className="font-semibold text-sm">E-MAIL</p>
-                    <p className="text-blue-600">info@company.com</p>
+                    <p className="text-blue-600">ERC@gmail.com</p>
                   </div>
                 </div>
 
                 {/* Helpdesk Section */}
                 <div className="flex items-center space-x-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-black"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M21 12.079V5a1 1 0 00-1-1H4a1 1 0 00-1 1v7.079a12.46 12.46 0 00-1.034 5.158A11.08 11.08 0 003 22.955c0 .073.006.145.017.217a11.153 11.153 0 001.483 3.578A9.945 9.945 0 006 28h12a9.946 9.946 0 001.5-.249c.082-.144.158-.292.227-.443a11.091 11.091 0 001.498-3.587c.014-.072.022-.145.022-.218a11.013 11.013 0 001.026-5.131c0-1.986-.338-3.893-1.03-5.639zm-2.062 7.021a.97.97 0 01-.54.875c-.285.117-.663.205-1.06.262H6.633c-.396-.057-.775-.145-1.06-.262a.971.971 0 01-.54-.875v-.75H18v.75z"
-                    />
-                  </svg>
-                  <div>
-                    <p className="font-semibold text-sm">HELPDESK</p>
-                    <a href="https://googlemeet.com" className="text-blue-600">
-                      https://googlemeet.com
-                    </a>
-                  </div>
+                  
                 </div>
               </div>
               </motion.div>
