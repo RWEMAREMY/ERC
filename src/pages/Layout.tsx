@@ -56,18 +56,34 @@ const Layout = () => {
                   ></path>
                 </svg>
               </button>
+
+
               {servicesOpen && (
-                <div className="absolute left-[20%] -top-36 ml-4 p-6 rounded-lg shadow-lg w-[800px]">
+                <div className="md:hidden mt-2 p-4 bg-[#043873] rounded-lg shadow-lg">
+                  <h3 className="text-xl font-bold mb-4 text-blue-300">Our Services</h3>
+                  <ul className="flex flex-col space-y-2">
+                    <li><Link to="/research" className="hover:text-blue-200">Market Research</Link></li>
+                    <li><Link to="/monitoring" className="hover:text-blue-200">Monitoring, Evaluation & Learning</Link></li>
+                    <li><Link to="/policy" className="hover:text-blue-200">Advise Policy Makers</Link></li>
+                    <li><Link to="/program" className="hover:text-blue-200">Programmatic Work</Link></li>
+                  </ul>
+                </div>
+              )}
+
+
+              {servicesOpen && (
+                <div className="hidden md:block absolute left-[20%] -top-36 ml-4 p-6 rounded-lg shadow-lg w-[800px]">
                   <h3 className="text-xl font-bold mb-4 text-blue-300">Our Services</h3>
                   <ul className="grid grid-cols-2 gap-2">
                     <li><Link to="/research">Market Research</Link></li>
                     <li><Link to="/monitoring">Monitoring, Evaluation & Learning</Link></li>
-                    <li><Link to="/policy">Advise policy Makers</Link></li>
+                    <li><Link to="/policy">Advise Policy Makers</Link></li>
                     <li><Link to="/program">Programmatic Work</Link></li>
                   </ul>
                 </div>
               )}
             </li>
+
             <li>
               <a
                 href="#publications"

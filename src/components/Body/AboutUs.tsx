@@ -17,27 +17,30 @@ function AboutUs() {
           {/* Paragraphs */}
           <div className="space-y-8">
             <p className="text-left text-gray-700 leading-relaxed">
-              Econometer Research Center LTD (ERC) is a rapidly growing
-              Africa-based research and advisory firm, established in 2020.
-              Specializing in research, impact evaluation and policy advisory.
-              ERC delivers high-quality research and strategic services to
-              governments, businesses, and non-profit organizations. ERC uses
-              innovative tools and rigorous methodologies to drive
-              transformative outcomes across Africa.
+              Econometer Research Center (ERC) is a rapidly growing Africa-based
+              research and advisory firm, established in 2020. Specializing in
+              research, impact evaluation, baseline studies, scoping analysis,
+              and policy advisory, ERC delivers high-quality diagnostic research
+              and strategic services to governments, businesses, and non-profit
+              organizations. We help clients by leveraging data to guide
+              sustainable, resilient, and strategic decisions.
             </p>
             <h2 className="text-left">We specialize in:</h2>
             <div className="flex gap-10">
               <p className="text-left text-gray-700 leading-relaxed">
                 <ul className="list-disc list-inside">
-                  <li>Monitoring & Evaluation Framework Design</li>
-                  <li>Policy Analysis</li>
-                  <li>Professional Training</li>
+                  <li>Conducting scoping studies and supporting the design of interventions</li>
+                  <li>Impact assessments and baseline studies</li>
+                  <li>Monitoring & Evaluation framework design</li>
+                  <li>Policy analysis</li>
                 </ul>
               </p>
               <p className="text-left text-gray-700 leading-relaxed">
                 <ul className="list-disc list-inside">
-                  <li>Feasibility and Diagnostic Studies</li>
-                  <li>Data Warehousing Services</li>
+                  <li>Leading and coordinating national surveys</li>
+                  <li>Professional training</li>
+                  <li>Big data analytics</li>
+                  <li>Data warehousing services</li>
                 </ul>
               </p>
             </div>

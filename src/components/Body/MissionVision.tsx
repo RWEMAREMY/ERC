@@ -62,13 +62,17 @@ function MissionVision() {
             <div className="bg-white p-4 rounded-lg shadow-md">
               <p className="text-left text-gray-700 leading-relaxed">
                 Our mission is to provide innovative, data-driven research and
-                advisory services that empower informed decision-making. We
-                focus on creating and implementing homegrown solutions to
-                address challenges faced by populations on their journey toward
+                advisory services that empower informed decision-making and
+                support the establishment, management, and evaluation of
+                impactful international development programs. We focus on
+                creating and implementing homegrown solutions to address the
+                challenges faced by populations on their journey toward
                 sustainable and inclusive prosperity. By harnessing local
-                knowledge, we aim to drive meaningful change and foster economic
-                growth and resilience. Ultimately, we are dedicated to promoting
-                long-term development in communities across Africa.
+                knowledge and emphasizing private sector development, we aim to
+                drive meaningful change, create jobs, and increase incomes,
+                fostering economic growth and resilience. Ultimately, we are
+                dedicated to promoting long-term development and enhancing the
+                quality of life in communities across Africa
               </p>
             </div>
           </div>
@@ -98,10 +102,12 @@ function MissionVision() {
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md">
               <p className="text-left text-gray-700 leading-relaxed">
-                To be a pioneering research consultancy that drives
-                transformative change and fosters sustainable development by
-                empowering communities and organizations through innovative,
-                data-driven solutions
+                To be the premier research and advisory firm in Africa,
+                empowering stakeholders with data-driven insights that drive
+                sustainable development and resilience. We envision a future
+                where informed decisions transform challenges into opportunities
+                for impactful change. Econometer Research Center can help you
+                understand your market and grow your business in East Africa.
               </p>
             </div>
           </div>

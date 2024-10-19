@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-[#043873] text-white py-8 ">
+    <footer ref={footerRef} className="bg-[#043873] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           <div
@@ -49,26 +49,30 @@ const Footer: React.FC = () => {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h2 className="font-bold mb-3">Company Info</h2>
+            <h2 className="font-bold mb-3 text-lg md:text-xl">Company Info</h2>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="hover:text-yellow-400">
+                <Link
+                  to="/"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-yellow-400">
+                <Link
+                  to="/about"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/publications" className="hover:text-yellow-400">
-                  publications
-                </Link>
-              </li>
-              <li>
-                <Link to="/reachus" className="hover:text-yellow-400">
-                  Reach us
+                <Link
+                  to="/publications"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Publications
                 </Link>
               </li>
             </ul>
@@ -81,26 +85,38 @@ const Footer: React.FC = () => {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h2 className="font-bold mb-3">Resources</h2>
+            <h2 className="font-bold mb-3 text-lg md:text-xl">Resources</h2>
             <ul className="space-y-2">
               <li>
-                <Link to="/research" className="hover:text-yellow-400">
-                  market research
+                <Link
+                  to="/research"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Market Research
                 </Link>
               </li>
               <li>
-                <Link to="monitoring" className="hover:text-yellow-400">
-                  Monitoring,Evaluation &Learning
+                <Link
+                  to="/monitoring"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Monitoring, Evaluation & Learning
                 </Link>
               </li>
               <li>
-                <Link to="/policy" className="hover:text-yellow-400">
-                  Advice policy makers
+                <Link
+                  to="/policy"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Advise Policy Makers
                 </Link>
               </li>
               <li>
-                <Link to="/program" className="hover:text-yellow-400">
-                  programmatic Work
+                <Link
+                  to="/program"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Programmatic Work
                 </Link>
               </li>
             </ul>
@@ -113,11 +129,14 @@ const Footer: React.FC = () => {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h2 className="font-bold mb-3">Get in touch</h2>
+            <h2 className="font-bold mb-3 text-lg md:text-xl">Get in Touch</h2>
             <ul className="space-y-2">
               <li>
-                <Link to="/reachus" className="hover:text-yellow-400">
-                  reach us
+                <Link
+                  to="/reachus"
+                  className="hover:text-yellow-400 text-sm md:text-base"
+                >
+                  Connect with us
                 </Link>
               </li>
             </ul>
@@ -132,21 +151,25 @@ const Footer: React.FC = () => {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <span>🌐</span>
-              <a href="#" className="hover:text-yellow-400">
+              <a
+                href="#"
+                className="hover:text-yellow-400 text-sm md:text-base"
+              >
                 English
               </a>
             </div>
           </div>
 
-          <div className="text-sm">&copy;2024.</div>
+          <div className="text-xs sm:text-sm">&copy;2024.</div>
+
           <div className="flex space-x-4">
-            <a href="#" className="hover:text-yellow-400">
+            <a href="#" className="hover:text-yellow-400 text-sm md:text-base">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="#" className="hover:text-yellow-400">
+            <a href="#" className="hover:text-yellow-400 text-sm md:text-base">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="hover:text-yellow-400">
+            <a href="#" className="hover:text-yellow-400 text-sm md:text-base">
               <i className="fab fa-linkedin-in"></i>
             </a>
           </div>

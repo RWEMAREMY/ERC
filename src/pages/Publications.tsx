@@ -1,165 +1,119 @@
-// src/pages/Publications.tsx
-import { useState } from "react"; // Import useState for pagination
+import { useEffect, useState } from "react";
 import Header from "../components/Header/PagesHeader";
 import Footer from "../components/Footer/Footer";
-import random from "../assets/Images/1 10.png";
-import random1 from "../assets/Images/nisr.jpeg";
-import random2 from "../assets/Images/consultancy.jpeg";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+interface Card {
+  _id?: string;
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  createdAt: string;
+}
 
 function Publications() {
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const itemsPerPage = 8; // Number of items per page
+  const [cards, setCards] = useState<Card[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
-  const documents = [
-    {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    },
-    {
-      img: random1,
-      title: "Third Document",
-      description: "A brief description of the Third Document.",
-      url: "/path/to/your/Third-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random2,
-      title: "Fourth Document",
-      description: "A brief description of the Fourth Document.",
-      url: "/path/to/your/Fourth-Document.pdf",
-    },
-    {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    }, {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    }, {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    }, {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    }, {
-      img: random,
-      title: "ERC Profile",
-      description: "A brief description of the ERC Profile document.",
-      url: "https://drive.google.com/file/d/1TmfWI9r9j6V0ZcauCmc3p-4Na0kv25Xm/view?usp=sharing",
-    },
-    // Add more documents as needed
-  ];
+  useEffect(() => {
+    fetchCards();
+  }, []);
 
-  const indexOfLastItem = currentPage * itemsPerPage; 
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage; 
-  const currentItems = documents.slice(indexOfFirstItem, indexOfLastItem); 
+  const fetchCards = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/publication-cards"
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-  const totalPages = Math.ceil(documents.length / itemsPerPage); // Calculate total pages
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page); // Update current page
-  };
-
-  const handleDownload = (url: string) => {
-    if (window.confirm("Do you want to download this document?")) {
-      window.location.href = url; // Redirect to the document URL for download
+      const data = await response.json();
+      console.log("API Response:", data);
+      if (Array.isArray(data)) {
+        setCards(data);
+      } else if (data.data && Array.isArray(data.data)) {
+        setCards(data.data);
+      } else {
+        console.error("Unexpected API response format:", data);
+        toast.error("Invalid data format received");
+        setCards([]);
+      }
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+      toast.error("Failed to load publications");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // New function to get pagination numbers
+  const truncateContent = (content: string, maxLength: number = 250) => {
+    const strippedContent = content.replace(/<[^>]+>/g, "");
+    if (strippedContent.length <= maxLength) return content;
+    return strippedContent.substring(0, maxLength) + "...";
+  };
+
+  if (isLoading) {
+    return (
+      <SkeletonTheme baseColor="#85929e" highlightColor="#85929e">
+        <div className="flex flex-wrap gap-6 p-6 w-full">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex-1 basis-[300px] max-w-[400px] bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <Skeleton height={200} />
+              <div className="p-4">
+                <Skeleton height={30} width="100%" />
+                <Skeleton count={3} />
+                <div className="flex justify-between items-center mt-4">
+                  <Skeleton width={100} />
+                  <Skeleton width={100} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SkeletonTheme>
+    );
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(cards.length / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // const handleDownload = (url: string) => {
+  //   if (window.confirm("Do you want to download this document?")) {
+  //     window.location.href = url;
+  //   }
+  // };
+
   const getPaginationNumbers = () => {
     const paginationNumbers = [];
-    const maxVisiblePages = 1; // Updated to show more pages
+    const maxVisiblePages = 1;
 
-    if (totalPages <= maxVisiblePages + 1) { // Adjusted condition for fewer pages
-      // If total pages are less than or equal to max visible pages, show all
+    if (totalPages <= maxVisiblePages + 1) {
       for (let i = 1; i <= totalPages; i++) {
         paginationNumbers.push(i);
       }
     } else {
-      // Show ellipsis if needed
       if (currentPage > maxVisiblePages + 1) {
-        paginationNumbers.push('...'); // Show ellipsis before the first visible page
+        paginationNumbers.push("...");
       }
 
-      // Show first page
       paginationNumbers.push(1);
 
-      // Calculate the range of pages to show
       const startPage = Math.max(2, currentPage - 1);
       const endPage = Math.min(totalPages - 1, currentPage + 1);
 
@@ -167,12 +121,10 @@ function Publications() {
         paginationNumbers.push(i);
       }
 
-      // Show ellipsis if needed
       if (currentPage < totalPages - maxVisiblePages) {
-        paginationNumbers.push('...'); // Show ellipsis after the last visible page
+        paginationNumbers.push("...");
       }
 
-      // Show last page
       paginationNumbers.push(totalPages);
     }
 
@@ -184,43 +136,72 @@ function Publications() {
       <Header />
       <main className="flex-grow">
         <div className="p-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4"> {/* Updated grid for responsiveness */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+            {" "}
+            {/* Updated grid for responsiveness */}
             {currentItems.map((doc, index) => (
-              <div key={index} className="bg-blue-300 hover:bg-orange-300 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4">
-                 <img src={doc.img} alt={doc.title} className="mb-2 rounded h-62 w-full object-cover" />
+              <div
+                key={index}
+                className="bg-blue-300 hover:bg-orange-300 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4"
+              >
+    <div className="aspect-w-16 aspect-h-9 mb-2"> {/* Add this wrapper */}
+      <img
+        src={doc.image}
+        alt={doc.title}
+        className="rounded w-full h-[250px] object-cover" // Fixed height
+      />
+    </div>
                 <h3 className="font-semibold">{doc.title}</h3>
-                <p className="text-sm">{doc.description}</p>
-                <button 
-                  onClick={() => handleDownload(doc.url)} 
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: truncateContent(doc.content),
+                  }}
+                />
+                {doc.content.length > 250 && (
+                  <Link
+                    to={`/publication/${doc._id}`}
+                    className="text-blue-600 hover:text-blue-800 mt-2 inline-block"
+                  >
+                    Read More
+                  </Link>
+                )}
+                {/* <button
+                  onClick={() => handleDownload(doc.url)}
                   className="text-black-500 underline"
                 >
                   Download
-                </button>
+                </button> */}
               </div>
             ))}
           </div>
           {/* Pagination Controls */}
-          <div className="flex justify-center mt-4 items-center flex-wrap"> {/* Added flex-wrap for better responsiveness */}
-            <button 
-              onClick={() => handlePageChange(currentPage - 1)} 
-              disabled={currentPage === 1} 
+          <div className="flex justify-center mt-4 items-center flex-wrap">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
               className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
             >
               <i className="fa-solid fa-arrow-left"></i> {/* Left Arrow */}
             </button>
             {getPaginationNumbers().map((page, index) => (
-              <button 
-                key={index} 
-                onClick={() => typeof page === 'number' && handlePageChange(page)} 
-                className={`mx-1 w-8 h-8 flex items-center justify-center rounded-full ${currentPage === page ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-                disabled={page === '...'} // Disable button for ellipsis
+              <button
+                key={index}
+                onClick={() =>
+                  typeof page === "number" && handlePageChange(page)
+                }
+                className={`mx-1 w-8 h-8 flex items-center justify-center rounded-full ${
+                  currentPage === page
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                }`}
+                disabled={page === "..."}
               >
                 {page}
               </button>
             ))}
-            <button 
-              onClick={() => handlePageChange(currentPage + 1)} 
-              disabled={currentPage === totalPages} 
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
               className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
             >
               <i className="fa-solid fa-arrow-right"></i> {/* Right Arrow */}

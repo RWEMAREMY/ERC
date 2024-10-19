@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Monitoring from "./pages/Monitoring";
 import Policy from "./pages/Policy";
 import Program from "./pages/Program";
+import PublicationDetail from "./components/PublicationDetail/PublicationDetails";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="monitoring" element={<Monitoring />} />
         <Route path="policy" element={<Policy />} />
         <Route path="program" element={<Program />} />
+        <Route path="/publication/:_id" element={<PublicationDetail />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
