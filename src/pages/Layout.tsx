@@ -12,7 +12,7 @@ const Layout = () => {
 
   const handlePublicationsClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate("/#pub", { state: { scrollToPublications: true } });
+    navigate("/publications", { state: { scrollToPublications: true } });
   };
 
   return (

@@ -132,7 +132,7 @@ const Header: React.FC = () => {
           />
         </div>
 
-        <nav className={`flex items-center ${menuOpen ? 'block' : 'hidden'} md:block`}>
+        <nav className={`flex items-center hidden md:block`}>
         <ul className="flex space-x-6">
             {navItems.map((item) => (
               <li key={item.to} className="relative">
@@ -181,7 +181,7 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
             <button
-              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 ${
+              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 hidden md:block ${
                 animate
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0"

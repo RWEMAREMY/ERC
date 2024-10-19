@@ -141,9 +141,7 @@ const Header: React.FC = () => {
         </div>
 
         <nav
-          className={`flex items-center ${
-            menuOpen ? "block" : "hidden"
-          } md:block`}
+          className={`flex items-center hidden md:block`}
         >
           <ul className="flex space-x-6">
             {navItems.map((item) => (
@@ -197,7 +195,7 @@ const Header: React.FC = () => {
                 animate
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0"
-              }`}
+              } hidden md:block`}
               onClick={toggleSearch}
               aria-label="Search"
             >
@@ -219,7 +217,7 @@ const Header: React.FC = () => {
             {searchOpen && (
               <form
                 onSubmit={handleSearchSubmit}
-                className="absolute right-10 top-full -mt-10"
+                className={`absolute right-10 top-full -mt-10`}
               >
                 <input
                   ref={searchInputRef}
@@ -249,10 +247,11 @@ const Header: React.FC = () => {
       <div
         className={`fixed top-[104px] left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
-        } md:hidden`}
+        } md:block`}
       >
         <Layout />
       </div>
+<<<<<<< HEAD
       <div className="flex justify-between">
         <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold transition-all duration-1000">
@@ -262,25 +261,48 @@ const Header: React.FC = () => {
             Research Center
           </h2>
           <p className="text-base sm:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
+=======
+      <div className="flex justify-between flex-col md:flex-row">
+        <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
+          <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-bold transition-all duration-1000">
+            Econometer
+          </h1>
+          <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 rounded-b-sm">
+            Research Center
+          </h2>
+          <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
+>>>>>>> 5fe9d7632eabe3ba7bc466817b48ce2a1c2cf056
             {displayedText}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
             <button
+<<<<<<< HEAD
               className="bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-2 px-4 sm:py-3 sm:px-6 rounded-full cursor-pointer transition-all duration=500 text-sm sm:text-base"
+=======
+              className={`bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-[10px] px-[15px] sm:py-[12px] sm:px-[20px] rounded-full cursor-pointer transition-all duration=500 text-xs sm:text-sm`}
+>>>>>>> 5fe9d7632eabe3ba7bc466817b48ce2a1c2cf056
               onClick={() => alert("Book Appointment clicked")}
             >
               BOOK APPOINTMENT NOW
             </button>
           </div>
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fe9d7632eabe3ba7bc466817b48ce2a1c2cf056
         <div>
           <img
             src={globe}
             alt="gif"
+<<<<<<< HEAD
             className={`w-full h-full pr-20 ${
               menuOpen ? "block" : "hidden"
             } md:block`}
+=======
+            className={`w-full h-full pr-20 hidden md:block mt-6`}
+>>>>>>> 5fe9d7632eabe3ba7bc466817b48ce2a1c2cf056
           />
         </div>
       </div>
