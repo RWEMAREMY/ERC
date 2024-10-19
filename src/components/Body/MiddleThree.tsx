@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Avatar from '../../assets/Images/Avater.png'
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const MiddleThree: React.FC = () => {
   const location = useLocation();
@@ -189,7 +189,13 @@ const MiddleThree: React.FC = () => {
             {/* Card 3, 4, 5 */}
             {/* ... (repeat the same structure for other cards) ... */}
           </div>
-
+          <div>
+          <button className='bg-blue-500 rounded-xl p-2 mt-2 font-back hover:bg-orange-300 hover:font-bold '>
+            <Link to="/publications" className="text-white hover:text-black ">
+                  more publications <i className="fa-solid fa-arrow-right"></i>
+                </Link>
+            </button>
+          </div>
         </div>
 
         {/* Remove the dots */}
