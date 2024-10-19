@@ -47,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={`bg-[#043873] hover:bg-blue-600 cursor-pointer text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${
+      className={`bg-[#043873] cursor-pointer text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{
@@ -63,7 +63,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </ul>
       <button
         onClick={onReadMore}
-        className="text-orange-400 -ml-24 hover:text-[#043873]"
+        className="text-orange-400 -ml-24 hover:text-[#df4e10]"
       >
         {linkText}
       </button>
@@ -157,7 +157,7 @@ const MiddleOne: React.FC = () => {
               : "opacity-0 -translate-y-10"
           }`}
         >
-          WHY CHOOSE US
+          Our expertise
         </h2>
         <p
           className={`text-gray-600 mb-12 transition-all duration-1000 ease-out delay-300 ${
