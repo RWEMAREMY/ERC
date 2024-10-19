@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Layout from "../../pages/Layout";
 import { useNavigate, NavLink } from "react-router-dom";
+import globe from "../../assets/GIF/globeGIF.gif";
 
 const useTypingEffect = (text: string, typingSpeed: number = 50) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
@@ -88,8 +90,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <div className="relative h-screen bg-[#043873] text-white overflow-hidden">
-
+    <div className="relative h-auto bg-[#043873] text-white overflow-hidden pb-10">
       <header className="flex justify-between items-center p-4 relative z-20">
         <div className="flex gap-5">
           <button
@@ -139,7 +140,9 @@ const Header: React.FC = () => {
           />
         </div>
 
-        <nav className="flex items-center">
+        <nav
+          className={`flex items-center hidden md:block`}
+        >
           <ul className="flex space-x-6">
             {navItems.map((item) => (
               <li key={item.to} className="relative">
@@ -192,7 +195,7 @@ const Header: React.FC = () => {
                 animate
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0"
-              }`}
+              } hidden md:block`}
               onClick={toggleSearch}
               aria-label="Search"
             >
@@ -214,7 +217,7 @@ const Header: React.FC = () => {
             {searchOpen && (
               <form
                 onSubmit={handleSearchSubmit}
-                className="absolute right-10 top-full -mt-10"
+                className={`absolute right-10 top-full -mt-10`}
               >
                 <input
                   ref={searchInputRef}
@@ -227,6 +230,7 @@ const Header: React.FC = () => {
               </form>
             )}
           </div>
+
           <button
             className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate
@@ -241,38 +245,40 @@ const Header: React.FC = () => {
       </header>
 
       <div
-        className={`fixed top-26 left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-[104px] left-0 w-full h-full bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        } md:block`}
       >
         <Layout />
       </div>
+      <div className="flex justify-between flex-col md:flex-row">
+        <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
+          <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-bold transition-all duration-1000">
+            Econometer
+          </h1>
+          <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 rounded-b-sm">
+            Research Center
+          </h2>
+          <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
+            {displayedText}
+          </p>
 
-      <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
-        <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold transition-all duration-1000">
-          Econometer
-        </h1>
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold transition-all duration-1000 border-b-4 rounded-b-sm">
-          Research Center
-        </h2>
-        <p className="text-base sm:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
-          {displayedText}
-        </p>
+          <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+            <button
+              className={`bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-[10px] px-[15px] sm:py-[12px] sm:px-[20px] rounded-full cursor-pointer transition-all duration=500 text-xs sm:text-sm`}
+              onClick={() => alert("Book Appointment clicked")}
+            >
+              BOOK APPOINTMENT NOW
+            </button>
+          </div>
+        </div>
 
-        <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
-          <button
-            className="bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-2 px-4 sm:py-3 sm:px-6 rounded-full cursor-pointer transition-all duration-500 text-sm sm:text-base"
-            onClick={() => alert("Get in touch clicked")}
-          >
-            Get in touch →
-          </button>
-
-          <button
-            className="bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-2 px-4 sm:py-3 sm:px-6 rounded-full cursor-pointer transition-all duration-500 text-sm sm:text-base"
-            onClick={() => alert("Book Appointment clicked")}
-          >
-            BOOK APPOINTMENT NOW
-          </button>
+        <div>
+          <img
+            src={globe}
+            alt="gif"
+            className={`w-full h-full pr-20 hidden md:block mt-6`}
+          />
         </div>
       </div>
     </div>

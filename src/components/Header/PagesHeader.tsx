@@ -132,7 +132,7 @@ const Header: React.FC = () => {
           />
         </div>
 
-        <nav className="flex items-center">
+        <nav className={`flex items-center hidden md:block`}>
         <ul className="flex space-x-6">
             {navItems.map((item) => (
               <li key={item.to} className="relative">
@@ -181,7 +181,7 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
             <button
-              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 ${
+              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 hidden md:block ${
                 animate
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0"
@@ -233,7 +233,6 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Slide-in Menu */}
       <div
         className={`fixed top-0 left-0 w-full h-auto bg-[#043873] z-20 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
@@ -288,10 +287,9 @@ const Header: React.FC = () => {
         <Layout />
       </div>
 
-      {/* Main Content */}
       <div className="flex flex-col justify-center items-center px-8 space-y-6 ml-10 mt-20 relative z-10">
         <h1
-          className={`text-8xl font-bold pt-10 transition-all duration-1000 ${
+          className={`lg:text-8xl font-bold pt-10 transition-all duration-1000 sm:text-xl md:text-2xl  ${
             animate
               ? "translate-x-0 opacity-100"
               : "-translate-x-full opacity-0"
