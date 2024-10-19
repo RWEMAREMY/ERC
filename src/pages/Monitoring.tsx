@@ -1,7 +1,7 @@
 import Header from "../components/Header/PagesHeader";
 import Footer from "../components/Footer/Footer";
 import globe from "../assets/Images/globe.jpg";
-
+import Partner from  "../components/Body/Partner"
 function Monitoring() {
   return (
     <div className="flex flex-col gap-10">
@@ -80,7 +80,7 @@ function Monitoring() {
             </div>
           </div>
         </section>
-
+<Partner />
         <section className="relative">
           <img
             src={globe}
