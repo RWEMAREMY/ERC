@@ -133,7 +133,7 @@ const Header: React.FC = () => {
         </div>
 
         <nav className={`flex items-center hidden md:block`}>
-        <ul className="flex space-x-6">
+          <ul className="flex space-x-6">
             {navItems.map((item) => (
               <li key={item.to} className="relative">
                 {item.subItems ? (
@@ -176,7 +176,7 @@ const Header: React.FC = () => {
               </li>
             ))}
           </ul>
-          </nav>
+        </nav>
 
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
