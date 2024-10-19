@@ -54,7 +54,7 @@ const MiddleSix: React.FC = () => {
           Make an Appointment
         </h1>
         <form
-          className={`mt-8 max-w-xl w-full transition-all duration-1000 ease-out delay-500 ${
+          className={`mt-8 max-w-xl w-full transition-all duration-1000 ease-out delay-500 p-4 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >

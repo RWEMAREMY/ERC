@@ -56,7 +56,7 @@ const LoginComponent = () => {
         </form>
       </div>
 
-      <div className="absolute -bottom-14 left-20">
+      <div className="flex bottom-14 -left-20">
         <button
           className="border border-gray-300 text-white py-1 px-4 rounded-lg"
           onClick={handleNavigate}
