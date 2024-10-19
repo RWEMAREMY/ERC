@@ -187,7 +187,7 @@ function Publications() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4"> {/* Updated grid for responsiveness */}
             {currentItems.map((doc, index) => (
               <div key={index} className="bg-blue-300 hover:bg-orange-300 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4">
-                <img src={doc.img} alt={doc.title} className="mb-2 rounded" />
+                 <img src={doc.img} alt={doc.title} className="mb-2 rounded h-62 w-full object-cover" />
                 <h3 className="font-semibold">{doc.title}</h3>
                 <p className="text-sm">{doc.description}</p>
                 <button 
