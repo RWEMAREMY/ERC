@@ -48,7 +48,7 @@ const organizations: Organization[] = [
 const OrganizationGrid: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-0">
-      <div className="grid grid-cols-1 md:grid-cols-2 text-[#043873]">
+      <div className="grid grid-cols-1 md:grid-cols-3 text-[#043873]">
         <h2 className="text-lg md:text-xl font-semibold mb-6 sm:text-sm lg:text-lg">
           Our Partners:
         </h2>
@@ -64,7 +64,7 @@ const OrganizationGrid: React.FC = () => {
               <img
                 src={org.logo}
                 alt={`${org.name} logo`}
-                className="w-full h-24 object-contain mb-4"
+                className="w-full h-32 object-contain mb-4"
               />
               <span className="inline-block text-orange-500 group-hover:text-orange-600">
                 ➜
