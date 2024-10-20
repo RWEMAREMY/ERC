@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Ellipse from '../../assets/Images/Ellipse 2.png';
-import Ellipse2 from '../../assets/Images/Cubes.jpeg'; // New image for the second card
+import Ellipse2 from '../../assets/Images/Cubes.jpeg'; 
 import Ellipse3 from '../../assets/Images/Avater.png';
 
 const AnimatedSection: React.FC<{ children: React.ReactNode; delay: number }> = ({ children, delay }) => {

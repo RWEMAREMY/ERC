@@ -3,6 +3,7 @@ import Logo from "../../assets/Images/ERC Logo 2.png";
 import Layout from "../../pages/Layout";
 import { useNavigate, NavLink } from "react-router-dom";
 import globe from "../../assets/GIF/globeGIF.gif";
+import BookmarkButton from "../Body/BookmarkButton";
 
 const useTypingEffect = (text: string, typingSpeed: number = 50) => {
   const [displayedText, setDisplayedText] = useState("");
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
 
   const paragraphText =
     "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
-  const displayedText = useTypingEffect(paragraphText, 30);
+  const displayedText = useTypingEffect(paragraphText, 200);
 
   useEffect(() => {
     setAnimate(true);
@@ -140,9 +141,7 @@ const Header: React.FC = () => {
           />
         </div>
 
-        <nav
-          className={`flex items-center hidden md:block`}
-        >
+        <nav className={`flex items-center hidden md:block`}>
           <ul className="flex space-x-6">
             {navItems.map((item) => (
               <li key={item.to} className="relative">
@@ -187,6 +186,34 @@ const Header: React.FC = () => {
             ))}
           </ul>
         </nav>
+
+        {/* Mobile Dropdown Menu */}
+        <div
+          className={`md:hidden ${servicesDropdownOpen ? "block" : "hidden"}`}
+        >
+          <button
+            onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+            className="text-white hover:text-[#DF4E10]"
+          >
+            Services
+          </button>
+          {servicesDropdownOpen && (
+            <ul className="flex flex-col bg-[#043873] rounded-md shadow-xl mt-2">
+              {navItems
+                .find((item) => item.label === "Services")
+                ?.subItems?.map((subItem) => (
+                  <li key={subItem.to}>
+                    <NavLink
+                      to={subItem.to}
+                      className="block px-4 py-2 text-sm text-white hover:bg-[#0A4D8F] hover:text-[#DF4E10]"
+                    >
+                      {subItem.label}
+                    </NavLink>
+                  </li>
+                ))}
+            </ul>
+          )}
+        </div>
 
         <div className="flex items-center space-x-4">
           <div className="relative pl-8">
@@ -262,14 +289,15 @@ const Header: React.FC = () => {
           <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
             {displayedText}
           </p>
-
           <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
-            <button
-              className={`bg-[#FFFFFF] hover:bg-orange-600 text-[#DF4E10] hover:text-[#FFFFFF] py-[10px] px-[15px] sm:py-[12px] sm:px-[20px] rounded-full cursor-pointer transition-all duration=500 text-xs sm:text-sm`}
-              onClick={() => alert("Book Appointment clicked")}
-            >
-              BOOK APPOINTMENT NOW
-            </button>
+            {/* Button that scrolls to target content */}
+            <BookmarkButton
+              onClick={() =>
+                document
+                  .getElementById("targetContent")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            />
           </div>
         </div>
         <div>
