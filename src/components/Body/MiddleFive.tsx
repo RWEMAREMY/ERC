@@ -93,7 +93,7 @@ const MiddleFive: React.FC = () => {
              <img
               src={member.imgSrc}
               alt={member.name}
-              className="w-full h-auto max-h-60 object-contain rounded-md mb-2" // Changed to object-contain and adjusted max-h
+              className="w-full h-auto max-h-60 object-contain rounded-md mb-2" 
             />
             <h3 className="font-semibold text-sm text-gray-800">{member.name}</h3>
             <p className="text-gray-600 mb-4">{member.role}</p>
