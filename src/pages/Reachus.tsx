@@ -1,8 +1,55 @@
+import { useState } from "react";
 import Header from "../components/Header/PagesHeader";
 import Footer from "../components/Footer/Footer";
 import { motion } from "framer-motion";
 
 function Reachus() {
+  const [formData, setFormData] = useState({
+    contactName: "",
+    street: "",
+    contactPhone: "",
+    email: "",
+    idea: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.contactName) newErrors.contactName = "Contact Name is required.";
+    if (!formData.street) newErrors.street = "Street is required.";
+    if (!formData.contactPhone) {
+      newErrors.contactPhone = "Contact Phone is required.";
+    } else if (!/^\d{10}$/.test(formData.contactPhone)) {
+      newErrors.contactPhone = "Contact Phone must be 10 digits.";
+    }
+    if (!formData.email) newErrors.email = "E-mail is required.";
+    if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid.";
+    if (!formData.idea) newErrors.idea = "Please share your idea.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+      setFormData({
+        contactName: "",
+        street: "",
+        contactPhone: "",
+        email: "",
+        idea: "",
+      });
+      setErrors({});
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -38,29 +85,45 @@ function Reachus() {
                   Get in <span className="text-[#043873]">touch</span>
                 </h1>
               </div>
-              <form className="space-y-4">
-                {["Contact Name", "Street", "Contact Phone", "E-mail", "Let's talk about your idea"].map((label, index) => (
+              
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                {[
+                  { label: "Contact Name", name: "contactName" },
+                  { label: "Street", name: "street" },
+                  { label: "Contact Phone", name: "contactPhone", type: "tel", pattern: "\\d{10}", placeholder: "e.g., 1234567890" },
+                  { label: "E-mail", name: "email" },
+                  { label: "Let's talk about your idea", name: "idea", isTextArea: true }
+                ].map(({ label, name, type = "text", isTextArea, pattern, placeholder }, index) => (
                   <div key={index}>
                     <label
-                      htmlFor={label.toLowerCase().replace(/\s+/g, '')}
+                      htmlFor={name}
                       className="block text-sm font-medium text-gray-700"
                     >
                       {label}
                     </label>
-                    {label === "Let's talk about your idea" ? (
+                    {isTextArea ? (
                       <textarea
-                        id={label.toLowerCase().replace(/\s+/g, '')}
+                        name={name}
+                        value={formData[name]}
+                        onChange={handleChange}
+                        id={name}
                         rows={4}
-                        className="w-full border-b-2 border-gray-300 p-2 focus:border-teal-400 outline-none"
+                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name] ? 'border-red-500' : 'border-gray-300'}`}
                         placeholder={label}
                       ></textarea>
                     ) : (
                       <input
-                        type={label === "E-mail" ? "email" : "text"}
-                        id={label.toLowerCase().replace(/\s+/g, '')}
-                        className="w-full border-b-2 border-gray-300 p-2 focus:border-teal-400 outline-none"
-                        placeholder={label}
+                        type={type}
+                        name={name}
+                        value={formData[name]}
+                        onChange={handleChange}
+                        pattern={pattern}
+                        placeholder={placeholder || label}
+                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name] ? 'border-red-500' : 'border-gray-300'}`}
                       />
+                    )}
+                    {errors[name] && (
+                      <p className="text-red-500 text-sm">{errors[name]}</p>
                     )}
                   </div>
                 ))}
@@ -72,8 +135,8 @@ function Reachus() {
                 </button>
               </form>
 
-              <div className="flex flex-col items-center justify-between md:flex-row md:space-x-2 space-y-6 md:space-y-0">
-                {[
+              <div className="flex flex-col items-center justify-between md:flex-row md:space-x-2 space-y-6 md:space-y-0 mt-8">
+                {[ 
                   { title: "Phone", value: "+250788392152", icon: "call" },
                   { title: "E-MAIL", value: "ERC@gmail.com", icon: "email" },
                 ].map((contact, index) => (
@@ -84,13 +147,9 @@ function Reachus() {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       {contact.icon === 'call' ? (
-                        <>
-                          <path d="M94,7167 L94,7169 L96,7169 C96,7167.895 95.105,7167 94,7167 M94,7163 L94,7165 C96.206,7165 98,7166.794 98,7169 L100,7169 C100,7165.686 97.314,7163 94,7163 M94,7159 L94,7161 C98.411,7161 102,7164.589 102,7169 L104,7169 C104,7163.477 99.523,7159 94,7159 M98.652..." />
-                        </>
+                        <path d="M94,7167 L94,7169 L96,7169 C96,7167.895 95.105,7167 94,7167 M94,7163 L94,7165 C96.206,7165 98,7166.794 98,7169 L100,7169 C100,7165.686 97.314,7163 94,7163 M94,7159 L94,7161 C98.411,7161 102,7164.589 102,7169 L104,7169 C104,7163.477 99.523,7159 94,7159" />
                       ) : (
-                        <>
-                          <path d="M0 1694.235h1920V226H0v1468.235ZM112.941..." />
-                        </>
+                        <path d="M0 1694.235h1920V226H0v1468.235ZM112.941..." />
                       )}
                     </svg>
                     <div>

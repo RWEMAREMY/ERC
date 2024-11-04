@@ -5,27 +5,6 @@ import { useNavigate, NavLink } from "react-router-dom";
 import globe from "../../assets/GIF/globeGIF.gif";
 import BookmarkButton from "../Body/BookmarkButton";
 
-const useTypingEffect = (text: string, typingSpeed: number = 50) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    } else {
-      setTimeout(() => {
-        setDisplayedText("");
-        setCurrentIndex(0);
-      }, 2000);
-    }
-  }, [text, currentIndex, typingSpeed]);
-
-  return displayedText;
-};
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,7 +22,7 @@ const Header: React.FC = () => {
 
   const paragraphText =
     "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
-  const displayedText = useTypingEffect(paragraphText, 200);
+  const displayedText = (paragraphText);
 
   useEffect(() => {
     setAnimate(true);
