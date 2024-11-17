@@ -1,20 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
->>>>>>> 3719ff62867e0d1763caa8fbcfd9113cb026afe9
 const MiddleSix: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState(""); // State for email
   const [emailError, setEmailError] = useState(""); // State for email error message
   const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-<<<<<<< HEAD
-
-=======
->>>>>>> 3719ff62867e0d1763caa8fbcfd9113cb026afe9
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
