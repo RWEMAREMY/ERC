@@ -64,7 +64,11 @@ const OrganizationGrid: React.FC = () => {
               <img
                 src={org.logo}
                 alt={`${org.name} logo`}
+<<<<<<< HEAD
                 className="w-full h-32 object-contain mb-4"
+=======
+                className="w-full h-28 object-contain mb-4"
+>>>>>>> 3719ff62867e0d1763caa8fbcfd9113cb026afe9
               />
               <span className="inline-block text-orange-500 group-hover:text-orange-600">
                 ➜

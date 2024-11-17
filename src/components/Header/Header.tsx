@@ -22,7 +22,7 @@ const Header: React.FC = () => {
 
   const paragraphText =
     "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
-  const displayedText = (paragraphText);
+  const displayedText = useTypingEffect(paragraphText, 200);
 
   useEffect(() => {
     setAnimate(true);
@@ -257,6 +257,10 @@ const Header: React.FC = () => {
       >
         <Layout />
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3719ff62867e0d1763caa8fbcfd9113cb026afe9
       <div className="flex justify-between flex-col md:flex-row">
         <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
           <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-bold transition-all duration-1000">

@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
                   to="/research"
                   className="hover:text-yellow-400 text-sm md:text-base"
                 >
-                  Market research
+                  Market Research
                 </Link>
               </li>
               <li>
