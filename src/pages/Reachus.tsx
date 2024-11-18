@@ -1,3 +1,4 @@
+// src/pages/Reachus.tsx
 import { useState } from "react";
 import Header from "../components/Header/PagesHeader";
 import Footer from "../components/Footer/Footer";
@@ -14,28 +15,31 @@ function Reachus() {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const validateForm = () => {
-    const newErrors = {};
-    if (!formData.contactName) newErrors.contactName = "Contact Name is required.";
-    if (!formData.street) newErrors.street = "Street is required.";
-    if (!formData.contactPhone) {
+    const newErrors: { [key: string]: string } = {};
+    // Check for empty fields
+    if (!formData.contactName.trim()){ newErrors.contactName = "Contact Name is required."}
+    if (!formData.street.trim()) newErrors.street = "Street is required.";
+    if (!formData.contactPhone.trim()) {
       newErrors.contactPhone = "Contact Phone is required.";
     } else if (!/^\d{10}$/.test(formData.contactPhone)) {
       newErrors.contactPhone = "Contact Phone must be 10 digits.";
     }
-    if (!formData.email) newErrors.email = "E-mail is required.";
-    if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid.";
-    if (!formData.idea) newErrors.idea = "Please share your idea.";
+    if (!formData.email.trim()) newErrors.email = "E-mail is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid.";
+    if (!formData.idea.trim()) newErrors.idea = "Please share your idea.";
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form submitted:", formData);
@@ -104,26 +108,26 @@ function Reachus() {
                     {isTextArea ? (
                       <textarea
                         name={name}
-                        value={formData[name]}
+                        value={formData[name as keyof typeof formData]}
                         onChange={handleChange}
                         id={name}
                         rows={4}
-                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name] ? 'border-red-500' : 'border-gray-300'}`}
+                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name as keyof typeof errors] ? 'border-red-500' : 'border-gray-300'}`}
                         placeholder={label}
                       ></textarea>
                     ) : (
                       <input
                         type={type}
                         name={name}
-                        value={formData[name]}
+                        value={formData[name as keyof typeof formData]}
                         onChange={handleChange}
                         pattern={pattern}
                         placeholder={placeholder || label}
-                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name] ? 'border-red-500' : 'border-gray-300'}`}
+                        className={`w-full border-b-2 p-2 focus:border-teal-400 outline-none ${errors[name as keyof typeof errors] ? 'border-red-500' : 'border-gray-300'}`}
                       />
                     )}
-                    {errors[name] && (
-                      <p className="text-red-500 text-sm">{errors[name]}</p>
+                    {errors[name as keyof typeof errors] && (
+                      <p className="text-red-500 text-sm">{errors[name as keyof typeof errors]}</p>
                     )}
                   </div>
                 ))}

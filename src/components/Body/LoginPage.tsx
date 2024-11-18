@@ -1,10 +1,8 @@
-import React, { useState } from "react"; // Added import for useState
-import Logo from "../../assets/Images/ERC Logo 2.png";
+import React, { FormEvent, useState } from "react"; // Added import for useState
+import Logo from "../../assets/Images/ERCDOCLOGO.png";
 import { useNavigate } from "react-router-dom";
-import { useState, FormEvent } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 interface LoginCredentials {
   email: string;
@@ -19,6 +17,7 @@ interface LoginResponse {
     role: string;
   };
 }
+
 const LoginComponent = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<LoginCredentials>({
@@ -26,18 +25,29 @@ const LoginComponent = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null); 
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [error, setError] = useState<string | null>(null); 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setCredentials(prev => ({
       ...prev,
       [id]: value
     }));
+
+    // Validate email and password on change
+    if (id === 'email') {
+      setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)); // Simple email regex
+    } else if (id === 'password') {
+      setIsPasswordValid(value.length >= 8); // Example password validation
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null); // Reset error state
 
     // Show loading toast
     const loadingToast = toast.loading("Logging in...");
@@ -79,7 +89,7 @@ const LoginComponent = () => {
       
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred during login';
-      // setError(errorMessage); 
+      setError(errorMessage); 
       toast.update(loadingToast, {
         render: errorMessage,
         type: "error",
@@ -93,7 +103,7 @@ const LoginComponent = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#043873] gap-12 p-10">
-            <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -116,11 +126,12 @@ const LoginComponent = () => {
           <p className="text-gray-300">Admin</p>
         </div>
 
-        {/* {error && (
+        {/* Error message display */}
+        {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
             <span className="block sm:inline">{error}</span>
           </div>
-        )} */}
+        )}
 
         <form className="space-y-14 mt-8 p-8" onSubmit={handleSubmit}>
           <div className="relative">
@@ -157,7 +168,7 @@ const LoginComponent = () => {
             />
             {/* Validation message for password */}
             {!isPasswordValid && (
-              <p className="text-red-500 text-xs mt-1">Password must be at least 8 characters long, contain at least 1 letter and 1 number.</p> // Updated message to match regex
+              <p className="text-red-500 text-xs mt-1">Password must be at least 8 characters long.</p>
             )}
           </div>
           <button

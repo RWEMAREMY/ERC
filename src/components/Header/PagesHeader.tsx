@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERC Logo 2.png";
+import Logo from "../../assets/Images/ERCDOCLOGO.png";
 import Layout from "../../pages/Layout";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import backgroundImage from "../../assets/Images/Back.png";
