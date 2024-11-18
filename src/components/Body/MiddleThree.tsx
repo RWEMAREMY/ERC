@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
-import Avatar from "../../assets/Images/Avater.png";
+// import Avatar from "../../assets/Images/Avater.png";
 import { useLocation, Link } from "react-router-dom";
+
+interface PublicationCard {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  author: string;
+  position: string;
+}
 
 const MiddleThree: React.FC = () => {
   const location = useLocation();
   const publicationsRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollDirection, setScrollDirection] = useState(1);
+  const [publicationCards, setPublicationCards] = useState<PublicationCard[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (location.state && location.state.scrollToPublications) {
@@ -92,6 +104,40 @@ const MiddleThree: React.FC = () => {
     };
   }, [scrollDirection]);
 
+  useEffect(() => {
+    const fetchPublicationCards = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/publication-cards');
+        if (!response.ok) {
+          throw new Error('Failed to fetch publication cards');
+        }
+        const data = await response.json();
+        setPublicationCards(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPublicationCards();
+  }, []);
+
+  const truncateContent = (content: string, maxLength: number = 150) => {
+    // First remove any HTML tags
+    const strippedContent = content.replace(/<[^>]*>/g, '');
+    
+    if (strippedContent.length <= maxLength) return strippedContent;
+    
+    const truncated = strippedContent.substr(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    
+    return `${truncated.substr(0, lastSpace)}...`;
+  };
+
+  if (isLoading) return <div className="text-center py-16">Loading...</div>;
+  if (error) return <div className="text-center py-16 text-red-500">{error}</div>;
+
   return (
     <section ref={publicationsRef} className="py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto text-center">
@@ -107,120 +153,35 @@ const MiddleThree: React.FC = () => {
             className="flex space-x-4 overflow-x-hidden cursor-grab active:cursor-grabbing p-2"
             style={{ userSelect: "none" }}
           >
-            {/* Card 1 */}
-            <div className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0">
-              <div className="text-4xl mb-4">“</div>
-              <p className="mb-8">
-                Whitepace is designed as a collaboration tool for businesses
-                that is a full project management solution.
-              </p>
-              <hr className="border-white mb-4" />
-              <div className="flex items-center">
-                <img
-                  src={Avatar}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold">Oberon Shaw, MCH</p>
-                  <p className="text-sm">
-                    Head of Talent Acquisition, North America
-                  </p>
+            {publicationCards.map((card) => (
+              <div 
+                key={card.id}
+                className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0"
+              >
+                <div className="text-4xl mb-4">"</div>
+                <p className="mb-8">{truncateContent(card.content)}</p>
+                <hr className="border-white mb-4" />
+                <div className="flex items-center">
+                  <img
+                    src={card.image}
+                    alt={`${card.author}'s profile`}
+                    className="w-12 h-12 rounded-full mr-4"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/fallback-image.png'; 
+                    }}
+                  />
+                  <div>
+                    <p className="font-bold">{card.title}</p>
+                    <p className="text-sm">{card.position}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0">
-              <div className="text-4xl mb-4">“</div>
-              <p className="mb-8">
-                Whitepace is designed as a collaboration tool for businesses
-                that is a full project management solution.
-              </p>
-              <hr className="border-white mb-4" />
-              <div className="flex items-center">
-                <img
-                  src={Avatar}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold">Oberon Shaw, MCH</p>
-                  <p className="text-sm">
-                    Head of Talent Acquisition, North America
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0">
-              <div className="text-4xl mb-4">“</div>
-              <p className="mb-8">
-                Whitepace is designed as a collaboration tool for businesses
-                that is a full project management solution.
-              </p>
-              <hr className="border-white mb-4" />
-              <div className="flex items-center">
-                <img
-                  src={Avatar}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold">Oberon Shaw, MCH</p>
-                  <p className="text-sm">
-                    Head of Talent Acquisition, North America
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0">
-              <div className="text-4xl mb-4">“</div>
-              <p className="mb-8">
-                Whitepace is designed as a collaboration tool for businesses
-                that is a full project management solution.
-              </p>
-              <hr className="border-white mb-4" />
-              <div className="flex items-center">
-                <img
-                  src={Avatar}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold">Oberon Shaw, MCH</p>
-                  <p className="text-sm">
-                    Head of Talent Acquisition, North America
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#043873] text-white shadow-lg rounded-lg p-6 text-left w-80 flex-shrink-0">
-              <div className="text-4xl mb-4">“</div>
-              <p className="mb-8">
-                Whitepace is designed as a collaboration tool for businesses
-                that is a full project management solution.
-              </p>
-              <hr className="border-white mb-4" />
-              <div className="flex items-center">
-                <img
-                  src={Avatar}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <p className="font-bold">Oberon Shaw, MCH</p>
-                  <p className="text-sm">
-                    Head of Talent Acquisition, North America
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
+          
           <div className="p-4">
-            <button className="bg-[#043873] rounded-xl p-4 mt-2 font-back hover:bg-[#df4e10] hover:font-bold ">
+            <button className="bg-[#043873] rounded-xl p-4 mt-2 font-back hover:bg-[#df4e10] hover:font-bold">
               <Link to="/publications" className="text-white hover:text-white">
                 More publications <i className="fa-solid fa-arrow-right"></i>
               </Link>

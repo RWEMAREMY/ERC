@@ -1,41 +1,110 @@
 import React, { useState } from "react"; // Added import for useState
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import { useNavigate } from "react-router-dom";
+import { useState, FormEvent } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user: {
+    id: number;
+    email: string;
+    role: string;
+  };
+}
 const LoginComponent = () => {
   const navigate = useNavigate();
-  
-  // Added state for email, password, and their validation statuses
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-
-  const handleNavigate =  (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate("/", { state: { scrollToPublications: true } });
+  const [credentials, setCredentials] = useState<LoginCredentials>({
+    email: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null); 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setCredentials(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
 
-  // Added validation function
-  const validateFields = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    setIsEmailValid(emailRegex.test(email));
-    setIsPasswordValid(passwordRegex.test(password));
-    return isEmailValid && isPasswordValid;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (validateFields()) {
-      // Proceed with form submission
-      console.log("Form submitted");
-      navigate("/"); // Navigate to the root path after successful submission
+    setIsLoading(true);
+
+    // Show loading toast
+    const loadingToast = toast.loading("Logging in...");
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const data: LoginResponse = await response.json();
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      // Store token and user info
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // Update loading toast to success
+      toast.update(loadingToast, {
+        render: "Login successful! Redirecting...",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+
+      // Redirect based on role after a short delay
+      setTimeout(() => {
+        if (data.user.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/client/dashboard');
+        }
+      }, 2000);
+      
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred during login';
+      // setError(errorMessage); 
+      toast.update(loadingToast, {
+        render: errorMessage,
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#043873] gap-12 p-10">
+            <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <img
         src={Logo}
         alt="Profile"
@@ -43,9 +112,15 @@ const LoginComponent = () => {
       />
       <div className="bg-transparent border border-gray-300 rounded-lg p-8 w-full max-w-md relative h-800">
         <div className="mt-2 text-center">
-          <h2 className="text-2xl text-white font-bold mb-2">login</h2>
+          <h2 className="text-2xl text-white font-bold mb-2">Login</h2>
           <p className="text-gray-300">Admin</p>
         </div>
+
+        {/* {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )} */}
 
         <form className="space-y-14 mt-8 p-8" onSubmit={handleSubmit}>
           <div className="relative">
@@ -55,10 +130,11 @@ const LoginComponent = () => {
             <input
               id="email"
               type="email"
-              className={`w-full px-4 py-2 border-b ${isEmailValid ? 'border-green-500' : 'border-red-500'} bg-transparent text-white outline-none focus:border-blue-500`}
+              value={credentials.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border-b border-gray-300 bg-transparent text-white outline-none focus:border-blue-500"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)} // Update email state
+              required
             />
             {/* Validation message for email */}
             {!isEmailValid && (
@@ -67,19 +143,17 @@ const LoginComponent = () => {
           </div>
 
           <div className="relative">
-            <label
-              className="block text-gray-300 text-sm mb-2"
-              htmlFor="password"
-            >
+            <label className="block text-gray-300 text-sm mb-2" htmlFor="password">
               Password
             </label>
             <input
               id="password"
               type="password"
-              className={`w-full px-4 py-2 border-b ${isPasswordValid ? 'border-green-500' : 'border-red-500'} bg-transparent text-white outline-none focus:border-blue-500`}
+              value={credentials.password}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border-b border-gray-300 bg-transparent text-white outline-none focus:border-blue-500"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} // Update password state
+              required
             />
             {/* Validation message for password */}
             {!isPasswordValid && (
@@ -88,9 +162,12 @@ const LoginComponent = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg mt-6 hover:bg-blue-700 transition"
+            disabled={isLoading}
+            className={`w-full bg-blue-600 text-white py-2 rounded-lg mt-6 hover:bg-blue-700 transition ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
-            SUBMIT
+            {isLoading ? 'LOGGING IN...' : 'SUBMIT'}
           </button>
         </form>
       </div>
@@ -98,7 +175,7 @@ const LoginComponent = () => {
       <div className="flex bottom-14 -left-20">
         <button
           className="border border-gray-300 text-white py-1 px-4 rounded-lg"
-          onClick={handleNavigate}
+          onClick={() => navigate(-1)}
         >
           Back
         </button>

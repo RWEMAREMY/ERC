@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { useNavigate } from "react-router-dom";
 const MiddleSix: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [email, setEmail] = useState(""); // State for email
-  const [emailError, setEmailError] = useState(""); // State for email error message
+  const [email] = useState(""); // State for email
+  const [emailError] = useState(""); // State for email error message
   const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,6 +24,7 @@ const MiddleSix: React.FC = () => {
 
     return () => {
       if (sectionRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(sectionRef.current);
       }
     };
@@ -31,6 +32,11 @@ const MiddleSix: React.FC = () => {
 
   const toggleContact = () => {
   navigate('/reachus');
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function handleEmailChange(_event: ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
   }
 
   return (

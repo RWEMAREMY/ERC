@@ -10,27 +10,20 @@ const MarketResearch: React.FC = () => {
         <section className="bg-gray-100 py-12">
           <div className="flex max-w-6xl mx-auto px-4 gap-10 md:px-0 flex-col md:flex-row">
             <h2 className="text-lg md:text-xl lg:text-2xl text-[#043873]">
-              Econometer Research Center can help you understand your market and
-              grow your business in East Africa.
+              At ERC, we use a market systems approach to address problems by
+              identifying root causes, not just symptoms, through the strategic
+              use of data
             </h2>
             <p className="mt-4 text-gray-600 max-w-2xl text-sm md:text-base lg:text-lg">
-              In a region where data is scarce, it is essential that
-              <span className="text-gray-600 underline cursor-pointer">
-                {" "}
-                policy makers{" "}
-              </span>
-              and businesses have access to accurate and timely information on
-              consumers,
-              <span className="text-gray-600 underline cursor-pointer">
-                {" "}
-                distribution channels
-              </span>
-              , retailers, and competitors. Econometer Research Center provides
-              <span className="text-gray-600 underline cursor-pointer">
-                {" "}
-                primary market research services
-              </span>{" "}
-              to businesses in East Africa.
+              In a region where data is scarce, it is crucial for policymakers
+              and businesses to have access to accurate and timely information.
+              Aligned with our vision of empowering stakeholders with
+              data-driven insights, Econometer Research Center employs a market
+              systems approach to provide comprehensive primary market research
+              services. By analyzing the intricate relationships within the
+              market, we help businesses in Africa better understand their
+              environment, enabling them to make informed decisions and drive
+              sustainable growth.
             </p>
           </div>
         </section>
@@ -67,21 +60,21 @@ const MarketResearch: React.FC = () => {
               Our market research services include:
             </h3>
             <ul className="list-disc list-inside mt-4 space-y-2 text-sm md:text-base lg:text-lg">
-              <li>Consumer focus groups</li>
-              <li>Consumer insight surveys</li>
-              <li>Product / Service Use Research</li>
-              <li>Immersive observation-based research</li>
-              <li>Buyer Persona Research</li>
+              <li>Design and coordinate national surveys </li>
+              <li>
+                Conducting scoping studies and supporting the design of
+                interventions
+              </li>
               <li>Market Segmentation Research</li>
+              <li>Customer Satisfaction survey</li>
+              <li>Pricing Research</li>
             </ul>
 
             <ul className="list-disc list-inside mt-4 space-y-2 text-sm md:text-base lg:text-lg">
-              <li>Pricing Research</li>
-              <li>Competitive Analysis</li>
-              <li>Customer Satisfaction and Loyalty Research</li>
-              <li>Brand Awareness Research</li>
-              <li>Campaign research</li>
-              <li>Size of market research</li>
+              <li>Human-Centered Research and Persona Analysis</li>
+              <li>Econometric and Causal Analysis</li>
+              <li>Digital economy research </li>
+              <li>Randomized Control trial study design and analysis </li>
             </ul>
           </div>
         </section>
@@ -89,9 +82,8 @@ const MarketResearch: React.FC = () => {
         <section className="bg-gray-100 py-12">
           <div className="max-w-6xl mx-auto px-4 md:px-0 text-center">
             <p className="text-gray-700 text-sm md:text-base lg:text-lg">
-              Econometer Research Center has provided market research services
-              to global FMCG brands, regional manufacturers and food processors,
-              global consultancy services, and investors in the services sector.
+              At Econometer Research Center, we believe that informed
+              decision-making is essential for success
             </p>
           </div>
         </section>

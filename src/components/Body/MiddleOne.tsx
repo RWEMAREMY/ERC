@@ -28,16 +28,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  const stripHtmlTags = (str: string) => {
+    return str.replace(/<[^>]*>/g, '');
+  };
+
   const descArray =
     typeof description === "string"
-      ? [description]
+      ? [stripHtmlTags(description)]
       : Array.isArray(description)
-      ? description
+      ? description.map(stripHtmlTags)
       : [];
 
-  const previewContent = descArray
-    .slice(0, 2)
-    .map((line) => (line.length > 100 ? `${line.substring(0, 100)}...` : line));
+      const previewContent = descArray
+      .slice(0, 2)
+      .map((line) => (line.length > 100 ? `${stripHtmlTags(line.substring(0, 100))}...` : stripHtmlTags(line)));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -66,7 +70,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={`bg-[#043873] cursor-pointer text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${
+      className={`bg-[#043873] h-[200px] cursor-pointer text-white p-6 rounded-lg shadow-lg flex flex-col items-center transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{
@@ -105,14 +109,20 @@ const Popup: React.FC<PopupProps> = ({
   description,
 }) => {
   if (!isOpen) return null;
+
+  const stripHtmlTags = (str: string) => {
+    return str.replace(/<[^>]*>/g, '');
+  };
+
   const descriptionArray = Array.isArray(description)
-    ? description
-    : [description];
+    ? description.map(stripHtmlTags)
+    : [stripHtmlTags(description)];
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 pointer-events-auto">
       <div className="bg-white p-8 rounded-lg max-w-md w-full max-h-[80vh] overflow-y-auto relative z-[51]">
         <h2 className="text-2xl font-bold mb-4 text-black">{title}</h2>
-        <div className="mb-4 text-gray-800">
+        <div className="mb-4 text-gray-800 text-left">
           {descriptionArray.map((line, index) => (
             <p key={index} className="mb-4">
               {line}
@@ -131,49 +141,23 @@ const Popup: React.FC<PopupProps> = ({
 };
 
 const MiddleOne: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [popupContent, setPopupContent] = useState<{
-    title: string;
-    description: string[];
-  } | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const [popupContent, setPopupContent] = useState<{ title: string; description: string[] } | null>(null);
   const [expertiseCards, setExpertiseCards] = useState<ExpertiseCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const stripHtmlTags = (html: string) => {
-    return html.replace(/<\/?[^>]+(>|$)/g, "");
-  };
-
   useEffect(() => {
     const fetchExpertiseCards = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/expertise-cards",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          console.error("Response status:", response.status);
-          console.error("Response statusText:", response.statusText);
-          throw new Error(
-            `Failed to fetch: ${response.status} ${response.statusText}`
-          );
-        }
+        const response = await fetch("http://localhost:5000/api/expertise-cards");
+        if (!response.ok) throw new Error(`Failed to fetch data`);
+
         const data = await response.json();
-
-        const cleanedData = data.map((card: ExpertiseCard) => ({
+        setExpertiseCards(data.map((card: ExpertiseCard) => ({
           ...card,
-          content: Array.isArray(card.content)
-            ? card.content.map((text) => stripHtmlTags(String(text)))
-            : [stripHtmlTags(String(card.content))],
-        }));
-
-        setExpertiseCards(cleanedData);
+          content: Array.isArray(card.content) ? card.content : [card.content],
+        })));
+        
         setLoading(false);
       } catch (err) {
         console.error("Fetch error:", err);
@@ -181,31 +165,8 @@ const MiddleOne: React.FC = () => {
         setLoading(false);
       }
     };
+
     fetchExpertiseCards();
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
   }, []);
 
   if (loading) {
@@ -218,13 +179,6 @@ const MiddleOne: React.FC = () => {
                 key={item}
                 className="bg-[#85929e] p-6 rounded-lg shadow-lg flex flex-col items-center"
               >
-                <Skeleton
-                  circle={true}
-                  height={60}
-                  width={60}
-                  className="mb-4"
-                  duration={1.5}
-                />
                 <Skeleton
                   height={24}
                   width={140}
@@ -260,59 +214,41 @@ const MiddleOne: React.FC = () => {
   }
 
   const handleReadMore = (title: string, description: string[]) => {
-    const descArray = Array.isArray(description) ? description : [description];
-    setPopupContent({
-      title,
-      description: descArray,
-    });
+    setPopupContent({ title, description });
   };
 
   return (
-    <section ref={sectionRef} className="bg-white py-16">
+    <section className="bg-white py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2
-          className={`text-3xl font-bold mb-4 transition-all duration-1000 ease-out ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-10"
-          }`}
-        >
-          Our expertise
-        </h2>
-        <p
-          className={`text-gray-600 mb-12 transition-all duration-1000 ease-out delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          Our expertise aims to tackle challenges with innovative methods and
-          help our partners to make a successful decision.
-        </p>
+        <h2 className="text-3xl font-bold mb-4">Our Expertise</h2>
+        <p className="text-gray-600 mb-12">Our expertise aims to tackle challenges with innovative methods.</p>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {expertiseCards?.map((card) => (
-            <div
+          {expertiseCards.map((card) => (
+            <ServiceCard
               key={card._id}
-              className="transition-all duration-300 ease-in-out transform rounded-lg hover:scale-105"
-            >
-              <ServiceCard
-                title={card.title}
-                icon={<i className={card.icon}></i>}
-                description={card.content}
-                linkText="Read More"
-                delay={0}
-                onReadMore={() => handleReadMore(card.title, card.content)}
-              />
-            </div>
+              title={card.title}
+              icon={<i className={card.icon}></i>}
+              description={card.content}
+              linkText="Read More"
+              delay={0}
+              onReadMore={() => handleReadMore(card.title, card.content)}
+            />
           ))}
         </div>
+        
+        {popupContent && (
+          <Popup
+            isOpen={!!popupContent}
+            onClose={() => setPopupContent(null)}
+            title={popupContent.title}
+            description={popupContent.description}
+          />
+        )}
       </div>
-      <Popup
-        isOpen={!!popupContent}
-        onClose={() => setPopupContent(null)}
-        title={popupContent?.title || ""}
-        description={popupContent?.description || []}
-      />
     </section>
   );
 };
+
 
 export default MiddleOne;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import Layout from "../../pages/Layout";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
-
+import backgroundImage from "../../assets/Images/Back.png";
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -82,7 +82,13 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <div className="relative bg-[#043873] text-white overflow-hidden h-3/4">
+    <div className="relative h-auto text-white overflow-hidden pb-10" 
+    style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <header className="flex justify-between items-center p-4 relative z-20">
         <div className="flex gap-5">
           <button

@@ -1,10 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERC Logo 2.png";
+import Logo from "../../assets/Images/ERCDOCLOGO.png";
 import Layout from "../../pages/Layout";
 import { useNavigate, NavLink } from "react-router-dom";
-import globe from "../../assets/GIF/globeGIF.gif";
+// import globe from "../../assets/GIF/globeGIF.gif";
 import BookmarkButton from "../Body/BookmarkButton";
+import backgroundImage from "../../assets/Images/Back.png";
+// const useTypingEffect = (text: string, typingSpeed: number = 50) => {
+//   const [displayedText, setDisplayedText] = useState("");
+//   const [currentIndex, setCurrentIndex] = useState(0);
 
+//   useEffect(() => {
+//     if (currentIndex < text.length) {
+//       const timeout = setTimeout(() => {
+//         setDisplayedText((prev) => prev + text[currentIndex]);
+//         setCurrentIndex((prev) => prev + 1);
+//       }, typingSpeed);
+//       return () => clearTimeout(timeout);
+//     } else {
+//       setTimeout(() => {
+//         setDisplayedText("");
+//         setCurrentIndex(0);
+//       }, 2000);
+//     }
+//   }, [text, currentIndex, typingSpeed]);
+
+//   return displayedText;
+// };
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +43,7 @@ const Header: React.FC = () => {
 
   const paragraphText =
     "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
-  const displayedText =(paragraphText);
+  const displayedText = paragraphText;
 
   useEffect(() => {
     setAnimate(true);
@@ -70,7 +91,14 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <div className="relative h-auto bg-[#043873] text-white overflow-hidden pb-10">
+    <div className="relative h-auto text-white overflow-hidden pb-10" 
+    style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
+    
       <header className="flex justify-between items-center p-4 relative z-20">
         <div className="flex gap-5">
           <button
@@ -258,11 +286,11 @@ const Header: React.FC = () => {
         <Layout />
       </div>
       <div className="flex justify-between flex-col md:flex-row">
-        <div className="flex flex-col justify-center items-start px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
+        <div className="flex flex-col justify-center items-start ml-12 px-4 sm:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
           <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-bold transition-all duration-1000">
             Econometer
           </h1>
-          <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 rounded-b-sm">
+          <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 mb-4 rounded-b-sm">
             Research Center
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor">
@@ -279,13 +307,13 @@ const Header: React.FC = () => {
             />
           </div>
         </div>
-        <div>
+        {/* <div>
           <img
             src={globe}
             alt="gif"
             className={`w-full h-full pr-20 hidden md:block mt-6`}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
