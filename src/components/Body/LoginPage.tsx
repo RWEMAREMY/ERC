@@ -77,14 +77,8 @@ const LoginComponent = () => {
         isLoading: false,
         autoClose: 2000,
       });
-
-      // Redirect based on role after a short delay
       setTimeout(() => {
-        if (data.user.role === 'admin') {
-          navigate('/admin/dashboard');
-        } else {
-          navigate('/client/dashboard');
-        }
+        window.location.href = 'https://erc-dashboard-one.vercel.app'; 
       }, 2000);
       
     } catch (err) {
