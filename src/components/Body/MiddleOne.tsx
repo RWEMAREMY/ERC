@@ -149,7 +149,7 @@ const MiddleOne: React.FC = () => {
   useEffect(() => {
     const fetchExpertiseCards = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/expertise-cards");
+        const response = await fetch("https://wizzy-africa-backend.onrender.com/api/expertise-cards");
         if (!response.ok) throw new Error(`Failed to fetch data`);
 
         const data = await response.json();

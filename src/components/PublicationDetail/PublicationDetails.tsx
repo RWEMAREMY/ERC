@@ -18,7 +18,7 @@ function PublicationDetail() {
     const fetchPublication = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/publication-cards/${_id}`
+          `https://wizzy-africa-backend.onrender.com/api/publication-cards/${_id}`
         );
         if (!response.ok) throw new Error("Publication not found");
         const data = await response.json();

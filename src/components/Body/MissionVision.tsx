@@ -9,7 +9,6 @@ function MissionVision() {
       className="py-12 bg-white"
     >
       <div className="max-w-5xl mx-auto text-center px-4">
-        {/* Title */}
         <motion.h2
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -18,7 +17,6 @@ function MissionVision() {
         >
           Our Mission & Vision
         </motion.h2>
-        {/* Subtitle */}
         <motion.p
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -29,14 +27,12 @@ function MissionVision() {
           our clients.
         </motion.p>
 
-        {/* Mission & Vision Cards */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
-          {/* Mission Card */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
             <div className="flex items-center justify-start mb-4">
               <div className="bg-blue-100 rounded-full p-2 items-center justify-center">
@@ -77,7 +73,6 @@ function MissionVision() {
             </div>
           </div>
 
-          {/* Vision Card */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
             <div className="flex items-center justify-start mb-4">
               <div className="bg-blue-100 rounded-full p-2">

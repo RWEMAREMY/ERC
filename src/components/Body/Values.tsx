@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
 
-// Define the type for a moral
 type Moral = {
   title: string;
   description: string;
@@ -9,9 +8,9 @@ type Moral = {
 };
 
 const Morals: React.FC = () => {
-  const [selectedMoral, setSelectedMoral] = useState<Moral | null>(null); // Updated state type
+  const [selectedMoral, setSelectedMoral] = useState<Moral | null>(null); 
 
-  const moralsData: Moral[] = [ // Specify the type for moralsData
+  const moralsData: Moral[] = [
     {
       title: 'Impact Oriented',
       description:
@@ -61,7 +60,6 @@ const Morals: React.FC = () => {
         className="py-12 bg-white"
       >
         <div className="max-w-6xl mx-auto text-left px-4">
-          {/* Title */}
           <motion.h2
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -70,7 +68,6 @@ const Morals: React.FC = () => {
           >
             Our Values
           </motion.h2>
-          {/* Subtitle */}
           <motion.p
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -80,7 +77,6 @@ const Morals: React.FC = () => {
             We provide both technical assistance and statistical consultancy to our clients.
           </motion.p>
 
-          {/* Values Cards Grid */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -116,10 +112,9 @@ const Morals: React.FC = () => {
         </div>
       </motion.section>
 
-      {/* Popup for detailed description */}
-      {selectedMoral && ( // Conditional rendering of the popup
-         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> {/* Added z-50 */}
-         <div className="bg-white p-6 rounded-lg shadow-lg h-fit w-[55%]"> {/* Your existing styles */}
+      {selectedMoral && (
+         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"> 
+         <div className="bg-white p-6 rounded-lg shadow-lg h-fit w-[55%]"> 
            <h3 className="text-xl font-semibold text-[#043873] mb-4">{selectedMoral.title}</h3>
            <p className="text-gray-700 mb-6">{selectedMoral.description}</p>
            <button onClick={handleClosePopup} className="text-red-500">Close</button>

@@ -14,7 +14,6 @@ function AboutUs() {
             We provide both technical assistance and statistical consultancy to
             our clients.
           </p>
-          {/* Paragraphs */}
           <div className="space-y-8">
             <p className="text-left text-gray-700 leading-relaxed">
               Econometer Research Center (ERC) is a rapidly growing Africa-based

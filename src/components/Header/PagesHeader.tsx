@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERC Logo 2.png";
+import React, { useState, useEffect } from "react";
+import Logo from "../../assets/Logos/Photoroom.png";
 import Layout from "../../pages/Layout";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import backgroundImage from "../../assets/Images/Back.png";
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const handleLoginClick = (e: React.MouseEvent) => {
@@ -40,28 +37,8 @@ const Header: React.FC = () => {
     setAnimate(true);
   }, []);
 
-  useEffect(() => {
-    if (searchOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, [searchOpen]);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-  };
-
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    if (!searchOpen) {
-      setSearchQuery("");
-    }
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Searching for: ${searchQuery}`);
-    setSearchOpen(false);
-    setSearchQuery("");
   };
 
   const navItems = [
@@ -185,7 +162,7 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <div className="relative pl-8">
+          {/* <div className="relative pl-8">
             <button
               className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 hidden md:block ${
                 animate
@@ -225,7 +202,7 @@ const Header: React.FC = () => {
                 />
               </form>
             )}
-          </div>
+          </div> */}
           <button
             className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate

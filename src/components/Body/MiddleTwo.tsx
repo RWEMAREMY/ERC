@@ -50,7 +50,7 @@ const MiddleTwo: React.FC = () => {
             className="w-full shadow-lg relative z-10"
           />
           <a
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" // Replace with actual video link
+            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
             target="_blank"
             rel="noopener noreferrer"
             className={`absolute inset-0 flex justify-center items-center transition-all duration-1000 ease-out delay-700 z-20 ${

@@ -1,12 +1,109 @@
 import Header from "../components/Header/PagesHeader";
 import Footer from "../components/Footer/Footer";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+interface FormData {
+  contactName: string;
+  phoneNumber: string;
+  email: string;
+  mainIdea: string;
+}
+
+interface FormErrors {
+  contactName?: string;
+  phoneNumber?: string;
+  email?: string;
+  mainIdea?: string;
+}
 function Reachus() {
+  const [formData, setFormData] = useState<FormData>({
+    contactName: '',
+    phoneNumber: '',
+    email: '',
+    mainIdea: ''
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData.contactName.trim()) {
+      newErrors.contactName = 'Contact name is required';
+    }
+
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone number is required';
+    } else if (!/^\d{10,}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = 'Invalid phone number format';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    if (!formData.mainIdea.trim()) {
+      newErrors.mainIdea = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      toast.error('Please fill in all required fields correctly');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://wizzy-africa-backend.onrender.com/api/queries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit query');
+      }
+
+      toast.success('Message sent successfully!');
+      setFormData({
+        contactName: '',
+        phoneNumber: '',
+        email: '',
+        mainIdea: ''
+      });
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-
+      <ToastContainer position="top-right" />
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -38,37 +135,81 @@ function Reachus() {
                   Get in <span className="text-[#043873]">touch</span>
                 </h1>
               </div>
-              <form className="space-y-4">
-                {["Contact Name", "Street", "Contact Phone", "E-mail", "Let's talk about your idea"].map((label, index) => (
-                  <div key={index}>
-                    <label
-                      htmlFor={label.toLowerCase().replace(/\s+/g, '')}
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      {label}
-                    </label>
-                    {label === "Let's talk about your idea" ? (
-                      <textarea
-                        id={label.toLowerCase().replace(/\s+/g, '')}
-                        rows={4}
-                        className="w-full border-b-2 border-gray-300 p-2 focus:border-teal-400 outline-none"
-                        placeholder={label}
-                      ></textarea>
-                    ) : (
-                      <input
-                        type={label === "E-mail" ? "email" : "text"}
-                        id={label.toLowerCase().replace(/\s+/g, '')}
-                        className="w-full border-b-2 border-gray-300 p-2 focus:border-teal-400 outline-none"
-                        placeholder={label}
-                      />
-                    )}
-                  </div>
-                ))}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="contactName" className="block text-sm font-medium text-gray-700">
+                    Contact Name
+                  </label>
+                  <input
+                    type="text"
+                    id="contactName"
+                    value={formData.contactName}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 ${errors.contactName ? 'border-red-500' : 'border-gray-300'} p-2 focus:border-teal-400 outline-none`}
+                    placeholder="Contact Name"
+                  />
+                  {errors.contactName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.contactName}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                    Contact Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} p-2 focus:border-teal-400 outline-none`}
+                    placeholder="Contact Phone"
+                  />
+                  {errors.phoneNumber && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 ${errors.email ? 'border-red-500' : 'border-gray-300'} p-2 focus:border-teal-400 outline-none`}
+                    placeholder="E-mail"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="mainIdea" className="block text-sm font-medium text-gray-700">
+                    Let's talk about your idea
+                  </label>
+                  <textarea
+                    id="mainIdea"
+                    value={formData.mainIdea}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className={`w-full border-b-2 ${errors.mainIdea ? 'border-red-500' : 'border-gray-300'} p-2 focus:border-teal-400 outline-none`}
+                    placeholder="Let's talk about your idea"
+                  />
+                  {errors.mainIdea && (
+                    <p className="text-red-500 text-sm mt-1">{errors.mainIdea}</p>
+                  )}
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-500 transition"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#00628b] text-white font-semibold py-2 px-4 rounded hover:bg-blue-500 transition disabled:opacity-50"
                 >
-                  Submit
+                  {isSubmitting ? 'Sending...' : 'Submit'}
                 </button>
               </form>
 

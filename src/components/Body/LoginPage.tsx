@@ -1,9 +1,9 @@
 import Logo from "../../assets/Images/ERC Logo 2.png";
 import { useNavigate } from "react-router-dom";
 import { useState, FormEvent } from "react";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 interface LoginCredentials {
   email: string;
@@ -11,11 +11,12 @@ interface LoginCredentials {
 }
 
 interface LoginResponse {
+  success: boolean;
+  message: string;
   token: string;
   user: {
-    id: number;
+    id: string;
     email: string;
-    role: string;
   };
 }
 const LoginComponent = () => {
@@ -25,41 +26,75 @@ const LoginComponent = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null); 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const validateInput = (id: string, value: string): string => {
+    switch (id) {
+      case "email":
+        if (!value) return "Email is required";
+        if (!/\S+@\S+\.\S+/.test(value)) return "Please enter a valid email";
+        return "";
+      case "password":
+        if (!value) return "Password is required";
+        if (value.length < 6) return "Password must be at least 6 characters";
+        return "";
+      default:
+        return "";
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setCredentials(prev => ({
+    setCredentials((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [id]: validateInput(id, value),
     }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    // Show loading toast
+    const emailError = validateInput("email", credentials.email);
+    const passwordError = validateInput("password", credentials.password);
+
+    if (emailError || passwordError) {
+      setErrors({
+        email: emailError,
+        password: passwordError,
+      });
+      toast.error("Please fill fields correctly before submitting");
+      return;
+    }
+
+    setIsLoading(true);
     const loadingToast = toast.loading("Logging in...");
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
+      const response = await fetch("https://wizzy-africa-backend.onrender.com/api/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
+        credentials: "include",
       });
 
       const data: LoginResponse = await response.json();
-      if (!response.ok) {
-        throw new Error('Login failed');
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Login failed");
       }
 
-      // Store token and user info
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      setAuthCookie(data.token, data.user);
 
-      // Update loading toast to success
       toast.update(loadingToast, {
         render: "Login successful! Redirecting...",
         type: "success",
@@ -67,18 +102,16 @@ const LoginComponent = () => {
         autoClose: 2000,
       });
 
-      // Redirect based on role after a short delay
       setTimeout(() => {
-        if (data.user.role === 'admin') {
-          navigate('/admin/dashboard');
-        } else {
-          navigate('/client/dashboard');
-        }
+        const dashboardUrl = new URL("https://erc-dashboard-one-git-main-munezeromichas-projects.vercel.app/");
+        dashboardUrl.searchParams.append("token", data.token);
+        dashboardUrl.searchParams.append("user", JSON.stringify(data.user));
+        window.location.href = dashboardUrl.toString();
       }, 2000);
-      
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred during login';
-      // setError(errorMessage); 
+      console.error("Login error:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred during login";
       toast.update(loadingToast, {
         render: errorMessage,
         type: "error",
@@ -90,9 +123,30 @@ const LoginComponent = () => {
     }
   };
 
+  const setAuthCookie = (
+    token: string,
+    user: { id: string; email: string }
+  ) => {
+    const secure = process.env.NODE_ENV === "production";
+
+    Cookies.set("auth_token", token, {
+      expires: 1,
+      secure: secure,
+      sameSite: "strict",
+      path: "/",
+    });
+
+    Cookies.set("user_info", JSON.stringify(user), {
+      expires: 1,
+      secure: secure,
+      sameSite: "strict",
+      path: "/",
+    });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#043873] gap-12 p-10">
-            <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -115,12 +169,6 @@ const LoginComponent = () => {
           <p className="text-gray-300">Admin</p>
         </div>
 
-        {/* {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
-            <span className="block sm:inline">{error}</span>
-          </div>
-        )} */}
-
         <form className="space-y-14 mt-8 p-8" onSubmit={handleSubmit}>
           <div className="relative">
             <label className="block text-gray-300 text-sm mb-2" htmlFor="email">
@@ -131,14 +179,21 @@ const LoginComponent = () => {
               type="email"
               value={credentials.email}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border-b border-gray-300 bg-transparent text-white outline-none focus:border-blue-500"
+              className={`w-full px-4 py-2 border-b ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } bg-transparent text-white outline-none focus:border-blue-500`}
               placeholder="Enter your email"
-              required
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
           <div className="relative">
-            <label className="block text-gray-300 text-sm mb-2" htmlFor="password">
+            <label
+              className="block text-gray-300 text-sm mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -146,19 +201,23 @@ const LoginComponent = () => {
               type="password"
               value={credentials.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border-b border-gray-300 bg-transparent text-white outline-none focus:border-blue-500"
-              placeholder="Enter your password"
-              required
+              className={`w-full px-4 py-2 border-b ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              } bg-transparent text-white outline-none focus:border-blue-500`}
+              placeholder="Enter your email"
             />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            )}
           </div>
           <button
             type="submit"
             disabled={isLoading}
             className={`w-full bg-blue-600 text-white py-2 rounded-lg mt-6 hover:bg-blue-700 transition ${
-              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isLoading ? 'LOGGING IN...' : 'SUBMIT'}
+            {isLoading ? "LOGGING IN..." : "SUBMIT"}
           </button>
         </form>
       </div>

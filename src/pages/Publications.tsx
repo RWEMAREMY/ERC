@@ -27,7 +27,7 @@ function Publications() {
   const fetchCards = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/publication-cards"
+        "https://wizzy-africa-backend.onrender.com/api/publication-cards"
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -138,19 +138,18 @@ function Publications() {
         <div className="p-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
             {" "}
-            {/* Updated grid for responsiveness */}
             {currentItems.map((doc, index) => (
               <div
                 key={index}
                 className="bg-blue-300 hover:bg-orange-300 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4"
               >
-    <div className="aspect-w-16 aspect-h-9 mb-2"> {/* Add this wrapper */}
-      <img
-        src={doc.image}
-        alt={doc.title}
-        className="rounded w-full h-[250px] object-cover" // Fixed height
-      />
-    </div>
+                <div className="aspect-w-16 aspect-h-9 mb-2">
+                  <img
+                    src={doc.image}
+                    alt={doc.title}
+                    className="rounded w-full h-[250px] object-cover"
+                  />
+                </div>
                 <h3 className="font-semibold">{doc.title}</h3>
                 <p
                   dangerouslySetInnerHTML={{
@@ -174,14 +173,14 @@ function Publications() {
               </div>
             ))}
           </div>
-          {/* Pagination Controls */}
           <div className="flex justify-center mt-4 items-center flex-wrap">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
+              aria-label="Previous page"
             >
-              <i className="fa-solid fa-arrow-left"></i> {/* Left Arrow */}
+              <i className="fa-solid fa-arrow-left"></i>
             </button>
             {getPaginationNumbers().map((page, index) => (
               <button
@@ -203,8 +202,9 @@ function Publications() {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
+              aria-label="Next page"
             >
-              <i className="fa-solid fa-arrow-right"></i> {/* Right Arrow */}
+              <i className="fa-solid fa-arrow-right"></i>
             </button>
           </div>
         </div>

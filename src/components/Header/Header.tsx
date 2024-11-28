@@ -1,38 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERCDOCLOGO.png";
+import React, { useState, useEffect } from "react";
+import Logo from "../../assets/Logos/Photoroom.png";
 import Layout from "../../pages/Layout";
 import { useNavigate, NavLink } from "react-router-dom";
-// import globe from "../../assets/GIF/globeGIF.gif";
 import BookmarkButton from "../Body/BookmarkButton";
 import backgroundImage from "../../assets/Images/Back.png";
-// const useTypingEffect = (text: string, typingSpeed: number = 50) => {
-//   const [displayedText, setDisplayedText] = useState("");
-//   const [currentIndex, setCurrentIndex] = useState(0);
 
-//   useEffect(() => {
-//     if (currentIndex < text.length) {
-//       const timeout = setTimeout(() => {
-//         setDisplayedText((prev) => prev + text[currentIndex]);
-//         setCurrentIndex((prev) => prev + 1);
-//       }, typingSpeed);
-//       return () => clearTimeout(timeout);
-//     } else {
-//       setTimeout(() => {
-//         setDisplayedText("");
-//         setCurrentIndex(0);
-//       }, 2000);
-//     }
-//   }, [text, currentIndex, typingSpeed]);
-
-//   return displayedText;
-// };
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
@@ -49,28 +25,8 @@ const Header: React.FC = () => {
     setAnimate(true);
   }, []);
 
-  useEffect(() => {
-    if (searchOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, [searchOpen]);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-  };
-
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    if (!searchOpen) {
-      setSearchQuery("");
-    }
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Searching for: ${searchQuery}`);
-    setSearchOpen(false);
-    setSearchQuery("");
   };
 
   const navItems = [
@@ -194,7 +150,6 @@ const Header: React.FC = () => {
           </ul>
         </nav>
 
-        {/* Mobile Dropdown Menu */}
         <div
           className={`md:hidden ${servicesDropdownOpen ? "block" : "hidden"}`}
         >
@@ -223,48 +178,6 @@ const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <div className="relative pl-8">
-            <button
-              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 ${
-                animate
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-full opacity-0"
-              } hidden md:block`}
-              onClick={toggleSearch}
-              aria-label="Search"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </button>
-            {searchOpen && (
-              <form
-                onSubmit={handleSearchSubmit}
-                className={`absolute right-10 top-full -mt-10`}
-              >
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-white text-black p-2 rounded-full focus:outline-none"
-                  placeholder="Search..."
-                />
-              </form>
-            )}
-          </div>
-
           <button
             className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate
@@ -298,7 +211,6 @@ const Header: React.FC = () => {
             {displayedText}
           </p>
           <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
-            {/* Button that scrolls to target content */}
             <BookmarkButton
               onClick={() =>
                 document
@@ -308,13 +220,6 @@ const Header: React.FC = () => {
             />
           </div>
         </div>
-        {/* <div>
-          <img
-            src={globe}
-            alt="gif"
-            className={`w-full h-full pr-20 hidden md:block mt-6`}
-          />
-        </div> */}
       </div>
     </div>
   );

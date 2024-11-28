@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-// import Avatar from "../../assets/Images/Avater.png";
 import { useLocation, Link } from "react-router-dom";
 
 interface PublicationCard {
@@ -107,7 +106,7 @@ const MiddleThree: React.FC = () => {
   useEffect(() => {
     const fetchPublicationCards = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/publication-cards');
+        const response = await fetch('https://wizzy-africa-backend.onrender.com/api/publication-cards');
         if (!response.ok) {
           throw new Error('Failed to fetch publication cards');
         }
@@ -124,7 +123,6 @@ const MiddleThree: React.FC = () => {
   }, []);
 
   const truncateContent = (content: string, maxLength: number = 150) => {
-    // First remove any HTML tags
     const strippedContent = content.replace(/<[^>]*>/g, '');
     
     if (strippedContent.length <= maxLength) return strippedContent;
