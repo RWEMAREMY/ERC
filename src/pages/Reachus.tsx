@@ -207,7 +207,7 @@ function Reachus() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#00628b] text-white font-semibold py-2 px-4 rounded hover:bg-blue-500 transition disabled:opacity-50"
+                  className="w-full bg-[#043873] text-white font-semibold py-2 px-4 rounded hover:bg-blue-900 transition disabled:opacity-50"
                 >
                   {isSubmitting ? 'Sending...' : 'Submit'}
                 </button>

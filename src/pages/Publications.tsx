@@ -27,7 +27,14 @@ function Publications() {
   const fetchCards = async () => {
     try {
       const response = await fetch(
-        "https://wizzy-africa-backend.onrender.com/api/publication-cards"
+        "https://wizzy-africa-backend.onrender.com/api/publication-cards",{
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -136,12 +143,12 @@ function Publications() {
       <Header />
       <main className="flex-grow">
         <div className="p-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-4">
             {" "}
             {currentItems.map((doc, index) => (
               <div
                 key={index}
-                className="bg-blue-300 hover:bg-orange-300 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4"
+                className="bg-[#043873] hover:bg-orange-600 hover:scale-105 duration-300 border rounded-lg shadow-lg p-4"
               >
                 <div className="aspect-w-16 aspect-h-9 mb-2">
                   <img
@@ -150,8 +157,9 @@ function Publications() {
                     className="rounded w-full h-[250px] object-cover"
                   />
                 </div>
-                <h3 className="font-semibold">{doc.title}</h3>
+                <h3 className="font-semibold text-white">{doc.title}</h3>
                 <p
+                  className="text-white"
                   dangerouslySetInnerHTML={{
                     __html: truncateContent(doc.content),
                   }}
@@ -159,7 +167,7 @@ function Publications() {
                 {doc.content.length > 250 && (
                   <Link
                     to={`/publication/${doc._id}`}
-                    className="text-blue-600 hover:text-blue-800 mt-2 inline-block"
+                    className="text-white hover:text-white mt-2 inline-block"
                   >
                     Read More
                   </Link>
@@ -177,10 +185,10 @@ function Publications() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
+              className="mx-2 p-2 rounded-full bg-[#043873] hover:bg-blue-900"
               aria-label="Previous page"
             >
-              <i className="fa-solid fa-arrow-left"></i>
+              <i className="fa-solid fa-arrow-left text-white"></i>
             </button>
             {getPaginationNumbers().map((page, index) => (
               <button
@@ -190,7 +198,7 @@ function Publications() {
                 }
                 className={`mx-1 w-8 h-8 flex items-center justify-center rounded-full ${
                   currentPage === page
-                    ? "bg-blue-500 text-white"
+                    ? "bg-[#043873] text-white"
                     : "bg-gray-200"
                 }`}
                 disabled={page === "..."}
@@ -201,10 +209,10 @@ function Publications() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="mx-2 p-2 rounded-full bg-gray-300 hover:bg-gray-400"
+              className="mx-2 p-2 rounded-full bg-[#043873] hover:bg-blue-900"
               aria-label="Next page"
             >
-              <i className="fa-solid fa-arrow-right"></i>
+              <i className="fa-solid fa-arrow-right text-white"></i>
             </button>
           </div>
         </div>

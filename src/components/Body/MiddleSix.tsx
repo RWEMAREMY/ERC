@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from "react-router-dom";
 interface FormData {
   fullName: string;
   email: string;
@@ -17,6 +17,7 @@ interface FormErrors {
   message?: string;
 }
 const MiddleSix: React.FC = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -122,7 +123,8 @@ const MiddleSix: React.FC = () => {
   };
 
   const toggleContact = () => {
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    navigate('/reachus');
   };
 
   return (
@@ -143,6 +145,7 @@ const MiddleSix: React.FC = () => {
         </h1>
 
         <form
+        id="appointment-form"
         onSubmit={handleSubmit}
         className={`max-w-xl w-full transition-all duration-1000 ease-out delay-500 p-4 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

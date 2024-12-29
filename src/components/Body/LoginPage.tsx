@@ -1,4 +1,4 @@
-import Logo from "../../assets/Images/ERC Logo 2.png";
+import Logo from "../../assets/Logos/Photoroom.png";
 import { useNavigate } from "react-router-dom";
 import { useState, FormEvent } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,11 +12,18 @@ interface LoginCredentials {
 
 interface LoginResponse {
   success: boolean;
-  message: string;
   token: string;
+  message?: string;
   user: {
     id: string;
     email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    profileImage: string;
+    role: string;
+    isActive: boolean;
+    lastLogin: string;
   };
 }
 const LoginComponent = () => {
@@ -103,7 +110,7 @@ const LoginComponent = () => {
       });
 
       setTimeout(() => {
-        const dashboardUrl = new URL("https://erc-dashboard-one-git-main-munezeromichas-projects.vercel.app/");
+        const dashboardUrl = new URL("http://localhost:5174");
         dashboardUrl.searchParams.append("token", data.token);
         dashboardUrl.searchParams.append("user", JSON.stringify(data.user));
         window.location.href = dashboardUrl.toString();

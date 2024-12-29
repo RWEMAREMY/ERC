@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-xs sm:text-sm">&copy;2024.</div>
+          <div className="text-xs sm:text-sm">&copy;2024</div>
 
           <div className="flex space-x-4">
             <a href="#" className="hover:text-yellow-400 text-sm md:text-base">

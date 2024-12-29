@@ -2,8 +2,16 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/PagesHeader";
 import magnifier from "../assets/Images/magnifier.jpg";
 import food from "../assets/Images/food.jpg";
+import Nutri1 from "../assets/Images/Nutri-1.jpg";
+import Nutri2 from "../assets/Images/Nutri-2.jpg";
+import Nutri3 from "../assets/Images/Nutri-3.jpg";
+import Nutri4 from "../assets/Images/Nutri-4.jpg";
+import Nutri5 from "../assets/Images/Nutri-5.jpg";
+
+
 
 function Program() {
+const photos = [food, Nutri1, Nutri2, Nutri3, Nutri4, Nutri5];
   return (
     <div className="flex flex-col gap-10">
       <Header />
@@ -98,9 +106,9 @@ function Program() {
           {Array.from({ length: 6 }).map((_, index) => (
             <img
               key={index}
-              src={food}
+              src={photos[index]}
               alt={`Image ${index + 1}`}
-              className="w-full h-auto rounded-lg shadow-lg object-cover"
+              className="w-full h-64 rounded-lg shadow-lg object-cover"
             />
           ))}
         </section>

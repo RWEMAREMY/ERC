@@ -55,8 +55,8 @@ function AboutUs() {
                   key={tab}
                   className={`flex-1 py-4 px-6 text-lg font-semibold ${
                     activeTab === tab
-                      ? "bg-blue-500 text-white rounded-lg ml-5 mr-5 hover:text-xl"
-                      : "text-blue-500 hover:bg-orange-200 rounded-lg pl-10 hover:text-xl"
+                      ? "bg-[#043873] text-white rounded-lg ml-5 mr-5 hover:text-xl"
+                      : "text-[#043873] hover:bg-[#043873] hover:text-white rounded-lg pl-10 hover:text-xl"
                   }`}
                   onClick={() => setActiveTab(tab)}
                 >

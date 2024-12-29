@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/Logos/Photoroom.png";
 import Layout from "../../pages/Layout";
-import { useLocation, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import backgroundImage from "../../assets/Images/Back.png";
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,25 +13,6 @@ const Header: React.FC = () => {
     navigate("/login");
   };
 
-  const location = useLocation();
-  const getPageTitle = () => {
-    const path = location.pathname.slice(1);
-
-    switch (path) {
-      case "":
-        return "Home";
-      case "about":
-        return "About us";
-      case "publications":
-        return "Publications";
-      case "reachus":
-        return "Connect with us";
-      case "services":
-        return "Services";
-      default:
-        return path.charAt(0).toUpperCase() + path.slice(1);
-    }
-  };
 
   useEffect(() => {
     setAnimate(true);
@@ -164,47 +145,6 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
-          {/* <div className="relative pl-8">
-            <button
-              className={`hover:bg-[#FFFFFF] text-[#DF4E10] text-white p-2 rounded-full transition-all duration-500 hidden md:block ${
-                animate
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-full opacity-0"
-              }`}
-              onClick={toggleSearch}
-              aria-label="Search"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </button>
-            {searchOpen && (
-              <form
-                onSubmit={handleSearchSubmit}
-                className="absolute right-10 top-full -mt-10"
-              >
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-white text-black p-2 rounded-full focus:outline-none"
-                  placeholder="Search..."
-                />
-              </form>
-            )}
-          </div> */}
           <button
             className={`bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-2 px-4 rounded-lg cursor-pointer transition-all duration-500 ${
               animate
@@ -280,7 +220,7 @@ const Header: React.FC = () => {
               : "-translate-x-full opacity-0"
           }`}
         >
-          {getPageTitle()}
+        <h1>Publication Details</h1>
         </h1>
       </div>
     </div>
