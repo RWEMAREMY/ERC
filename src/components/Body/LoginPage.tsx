@@ -110,7 +110,7 @@ const LoginComponent = () => {
       });
 
       setTimeout(() => {
-        const dashboardUrl = new URL("https://erc-dashboard-one.vercel.app/");
+        const dashboardUrl = new URL("http://localhost:5174");
         dashboardUrl.searchParams.append("token", data.token);
         dashboardUrl.searchParams.append("user", JSON.stringify(data.user));
         window.location.href = dashboardUrl.toString();
