@@ -101,8 +101,6 @@ function Policy() {
           </ul>
         </section>
       </div>
-
-      {/* Footer */}
       <Footer />
     </div>
   );

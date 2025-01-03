@@ -73,7 +73,7 @@ function Monitoring() {
             </div>
           </div>
         </section> */}
-        {/* <Partner /> */}
+        
         <section className="relative">
           <img
             src={globe}
@@ -113,8 +113,6 @@ function Monitoring() {
           </div>
         </section>
       </div>
-
-      {/* Footer */}
       <Footer />
     </div>
   );

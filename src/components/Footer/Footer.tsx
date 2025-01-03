@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+<<<<<<< HEAD
 import Logo from "../../assets/Images/ERCDOCLOGO.png";
+=======
+import Logo from "../../assets/Logos/Photoroom.png"
+>>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -160,7 +164,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-xs sm:text-sm">&copy;2024.</div>
+          <div className="text-xs sm:text-sm">&copy;2024</div>
 
           <div className="flex space-x-4">
             <a href="#" className="hover:text-yellow-400 text-sm md:text-base">

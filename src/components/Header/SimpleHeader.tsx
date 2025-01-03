@@ -1,43 +1,18 @@
-<<<<<<< HEAD
-import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERCDOCLOGO.png";
-=======
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/Logos/Photoroom.png";
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 import Layout from "../../pages/Layout";
-import { useLocation, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import backgroundImage from "../../assets/Images/Back.png";
 
-const PageHeader: React.FC = () => {
+const SimpleHeader: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const location = useLocation();
 
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
     navigate("/login");
-    setMenuOpen(false);
-  };
-
-  const getPageTitle = () => {
-    const path = location.pathname.slice(1);
-    switch (path) {
-      case "":
-        return "Home";
-      case "about":
-        return "About us";
-      case "publications":
-        return "Publications";
-      case "reachus":
-        return "Connect with us";
-      case "services":
-        return "Services";
-      default:
-        return path.charAt(0).toUpperCase() + path.slice(1);
-    }
   };
 
   useEffect(() => {
@@ -236,12 +211,11 @@ const PageHeader: React.FC = () => {
             <div className="w-8" />
           </header>
 
-          <div className="flex flex-col flex-grow overflow-y-auto">
+          <div className="flex flex-col h-full overflow-y-auto">
             <Layout />
 
             <div className="p-4">
               <button
-                title="Login"
                 className="w-full bg-[#FFFFFF] hover:bg-[#DF4E10] text-[#DF4E10] hover:text-[#FFFFFF] font-bold py-3 px-4 rounded-lg transition-all duration-300"
                 onClick={handleLoginClick}
               >
@@ -260,11 +234,11 @@ const PageHeader: React.FC = () => {
               : "-translate-x-full opacity-0"
           }`}
         >
-          {getPageTitle()}
+          Publication Details
         </h1>
       </div>
     </div>
   );
 };
 
-export default PageHeader;
+export default SimpleHeader;

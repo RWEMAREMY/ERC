@@ -1,22 +1,34 @@
-   /** @type {import('tailwindcss').Config} */
-   export const content = [
+/** @type {import('tailwindcss').Config} */
+export const content = [
   "./src/**/*.{js,jsx,ts,tsx}",
 ];
 export const theme = {
   extend: {
-      animation: {
-        marquee: 'marquee 25s linear infinite',
-        marquee2: 'marquee2 35s linear infinite',
+    animation: {
+      'slide-left': 'slideLeft 25s linear infinite',
+      'slide-right': 'slideRight 25s linear infinite',
+    },
+    keyframes: {
+      slideLeft: {
+        from: { transform: 'translateX(0)' },
+        to: { transform: 'translateX(-50%)' }
       },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '80%': { transform: 'translateX(-80%)' },
-        },
-      },
-      fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
+      slideRight: {
+        from: { transform: 'translateX(-50%)' },
+        to: { transform: 'translateX(0)' }
       },
     },
+    fontFamily: {
+      sans: ['Montserrat', 'sans-serif'],
+    },
+  },
 };
-export const plugins = [];
+export const plugins = [
+  function ({ addUtilities }) {
+    addUtilities({
+      '.pause': {
+        'animation-play-state': 'paused',
+      }
+    })
+  }
+];

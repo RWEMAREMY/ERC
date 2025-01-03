@@ -14,7 +14,6 @@ function AboutUs() {
             We provide both technical assistance and statistical consultancy to
             our clients.
           </p>
-          {/* Paragraphs */}
           <div className="space-y-8">
             <p className="text-left text-gray-700 leading-relaxed">
               Econometer Research Center (ERC) is a rapidly growing Africa-based
@@ -26,38 +25,40 @@ function AboutUs() {
               sustainable, resilient, and strategic decisions.
             </p>
             <h2 className="text-left">We specialize in:</h2>
-            <div className="flex gap-10">
-              <p className="text-left text-gray-700 leading-relaxed">
-                <ul className="list-disc list-inside">
+            <div className="flex flex-col md:flex-row md:gap-10">
+              <div className="mb-4 md:mb-0">
+                <ul className="list-disc list-inside text-left text-gray-700">
                   <li>Conducting scoping studies and supporting the design of interventions</li>
                   <li>Impact assessments and baseline studies</li>
                   <li>Monitoring & Evaluation framework design</li>
                   <li>Policy analysis</li>
                 </ul>
-              </p>
-              <p className="text-left text-gray-700 leading-relaxed">
-                <ul className="list-disc list-inside">
+              </div>
+              <div>
+                <ul className="list-disc list-inside text-left text-gray-700">
                   <li>Leading and coordinating national surveys</li>
                   <li>Professional training</li>
                   <li>Big data analytics</li>
                   <li>Data warehousing services</li>
                 </ul>
-              </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <main className="flex-grow ">
-        <div className="container mx-auto py-16 px-4">
+
+      <main className="flex-grow">
+        <div className="container mx-auto py-8 md:py-16 px-4">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+
             <div className="flex border-b">
               {["mission", "team", "values"].map((tab) => (
                 <button
                   key={tab}
-                  className={`flex-1 py-4 px-6 text-lg font-semibold ${
+                  className={`flex-1 py-3 md:py-4 px-2 md:px-6 text-sm md:text-lg font-semibold transition-all duration-300 ${
                     activeTab === tab
-                      ? "bg-blue-500 text-white rounded-lg ml-5 mr-5 hover:text-xl"
-                      : "text-blue-500 hover:bg-orange-200 rounded-lg pl-10 hover:text-xl"
+                      ? "bg-[#043873] text-white rounded-t-lg mx-1 md:mx-5"
+                      : "text-[#043873] hover:bg-gray-100 hover:text-[#043873]"
                   }`}
                   onClick={() => setActiveTab(tab)}
                 >
@@ -66,11 +67,10 @@ function AboutUs() {
               ))}
             </div>
 
-            <div className="p-8">
+
+            <div className="p-4 md:p-8">
               {activeTab === "mission" && <MissionVision />}
-
               {activeTab === "team" && <MiddleFive />}
-
               {activeTab === "values" && <Values />}
             </div>
           </div>
