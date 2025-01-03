@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   };
 
   const paragraphText =
-    "ERC's mission is to work in the direction of accelerating the time to value and maximize the investment of our clients around the world.";
+    "Our mission is to provide innovative, data-driven research and advisory services that empower informed decision-making through market system approach.";
   const displayedText = paragraphText;
 
   useEffect(() => {
@@ -252,20 +252,20 @@ const Header: React.FC = () => {
       </div>
 
       <div className="flex justify-between flex-col md:flex-row">
-        <div className="flex flex-col justify-center items-start px-6 md:px-8 space-y-4 sm:space-y-6 mt-8 sm:mt-20 relative z-10">
-          <div className="flex flex-col items-start ml-[26px] gap-4">
+        <div className="flex flex-col justify-center items-start px-6 md:px-8 space-y-2 sm:space-y-4 sm:mt-6 relative z-10"> {/* Reduced space-y values */}
+          {/* <div className="flex flex-col items-start ml-[26px]">
             <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-bold transition-all duration-1000">
               Econometer
             </h1>
-            <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 mb-4 rounded-b-sm">
+            <h2 className="text-3xl sm:text-xl md:text-[2.5rem] font-bold transition-all duration-1000 border-b-4 mb-2 rounded-b-sm"> 
               Research Center
             </h2>
-          </div>
+          </div> */}
           
-          <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl h-20 typing-cursor ml-[26px]">
+          <p className="text-sm sm:text-base lg:text-lg text-[#DF4E10] font-bold max-w-xl typing-cursor ml-[26px]"> {/* Removed h-20 */}
             {displayedText}
           </p>
-          <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4 ml-[26px]"> 
+          <div className="flex flex-col sm:flex-row justify-between w-full mt-4 sm:mt-8 space-y-4 sm:space-y-0 sm:space-x-4 ml-[26px]">
             <BookmarkButton
               onClick={() =>
                 document

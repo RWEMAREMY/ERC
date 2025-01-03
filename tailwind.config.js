@@ -5,8 +5,8 @@ export const content = [
 export const theme = {
   extend: {
     animation: {
-      'slide-left': 'slideLeft 25s linear infinite',
-      'slide-right': 'slideRight 25s linear infinite',
+      'slide-left': 'slideLeft 60s linear infinite',
+      'slide-right': 'slideRight 60s linear infinite',
     },
     keyframes: {
       slideLeft: {

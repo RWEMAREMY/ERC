@@ -10,39 +10,17 @@ function AboutUs() {
     <main className="flex-grow items-center justify-center pt-10 space-y-10">
       <section className="py-8 bg-white text-center">
         <div className="max-w-4xl mx-auto px-4">
-          <p className="text-gray-500 mb-8">
-            We provide both technical assistance and statistical consultancy to
-            our clients.
-          </p>
+        
           <div className="space-y-8">
-            <p className="text-left text-gray-700 leading-relaxed">
-              Econometer Research Center (ERC) is a rapidly growing Africa-based
-              research and advisory firm, established in 2020. Specializing in
+            <p className="text-left text-gray-700 leading-relaxed text-xl">
+              <span className="font-bold">Econometer Research Center (ERC)</span> is a rapidly growing Africa-based
+              research and advisory firm, established in 2020, specializing in
               research, impact evaluation, baseline studies, scoping analysis,
-              and policy advisory, ERC delivers high-quality diagnostic research
+              and policy advisory services. ERC delivers high-quality diagnostic research
               and strategic services to governments, businesses, and non-profit
               organizations. We help clients by leveraging data to guide
               sustainable, resilient, and strategic decisions.
             </p>
-            <h2 className="text-left">We specialize in:</h2>
-            <div className="flex flex-col md:flex-row md:gap-10">
-              <div className="mb-4 md:mb-0">
-                <ul className="list-disc list-inside text-left text-gray-700">
-                  <li>Conducting scoping studies and supporting the design of interventions</li>
-                  <li>Impact assessments and baseline studies</li>
-                  <li>Monitoring & Evaluation framework design</li>
-                  <li>Policy analysis</li>
-                </ul>
-              </div>
-              <div>
-                <ul className="list-disc list-inside text-left text-gray-700">
-                  <li>Leading and coordinating national surveys</li>
-                  <li>Professional training</li>
-                  <li>Big data analytics</li>
-                  <li>Data warehousing services</li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>

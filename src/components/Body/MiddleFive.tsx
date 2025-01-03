@@ -90,11 +90,11 @@ const MiddleFive: React.FC = () => {
             }`}
             style={{ transitionDelay: `${600 + index * 200}ms` }}
           >
-            <div className="w-full h-48 mb-2">
+            <div className="w-full h-52 mb-2">
               <img
                 src={member.imgSrc}
                 alt={member.name}
-                className="w-full h-full object-contain rounded-md"
+                className="w-full h-full w-full object-contain rounded-md"
               />
             </div>
             <h3 className="font-semibold text-sm text-gray-800">{member.name}</h3>

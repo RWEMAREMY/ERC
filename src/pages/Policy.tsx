@@ -60,11 +60,9 @@ function Policy() {
             className="w-full h-[300px] object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
-            <h2 className="text-white text-lg sm:text-xl md:text-2xl text-center px-4">
-              Ultimately, we work to grow the voice and opportunities for the
-              population we serve with a focus on those who are most
-              disadvantaged.
-            </h2>
+          <h1 className="text-white text-4xl sm:text-3xl md:text-4xl lg:text-5xl text-center px-4">
+  Ultimately, our goal is to amplify the voice and expand opportunities for the populations we serve, with a particular emphasis on those who are most disadvantaged.
+</h1>
           </div>
         </section>
 

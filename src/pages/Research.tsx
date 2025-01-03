@@ -15,15 +15,15 @@ const MarketResearch: React.FC = () => {
               use of data
             </h2>
             <p className="mt-4 text-gray-600 max-w-2xl text-sm md:text-base lg:text-lg">
-              In a region where data is scarce, it is crucial for policymakers
-              and businesses to have access to accurate and timely information.
-              Aligned with our vision of empowering stakeholders with
-              data-driven insights, Econometer Research Center employs a market
-              systems approach to provide comprehensive primary market research
-              services. By analyzing the intricate relationships within the
-              market, we help businesses in Africa better understand their
-              environment, enabling them to make informed decisions and drive
-              sustainable growth.
+              In a region where data is limited, it is essential for
+              policymakers and businesses to access accurate and timely
+              information. In line with our vision of empowering stakeholders
+              through data-driven insights, Econometer Research Center uses a
+              market systems approach to deliver comprehensive primary market
+              research services. By examining the complex dynamics within the
+              market, we help businesses across Africa gain a deeper
+              understanding of their environment, empowering them to make
+              informed decisions and foster sustainable growth.
             </p>
           </div>
         </section>
@@ -31,9 +31,9 @@ const MarketResearch: React.FC = () => {
         <section className="bg-white py-12">
           <div className="max-w-6xl mx-auto px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-lg md:text-xl font-semibold text-gray-600">
-                Econometer Research Center can help your business:
-              </h3>
+              <h3 className="flex text-orange-500 bg-[#043873]  rounded text-center items-center text-sm md:text-xl lg:text-2xl p-4">
+              Econometer Research Center can help your business:
+            </h3>
             </div>
 
             <div>
@@ -56,25 +56,21 @@ const MarketResearch: React.FC = () => {
 
         <section className="text-gray-800 py-12">
           <div className="max-w-6xl mx-auto px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <h3 className="flex bg-[#043873] rounded text-center items-center text-lg md:text-xl lg:text-2xl text-white p-4">
+            <h3 className="flex bg-[#043873] rounded text-center items-center text-lg md:text-xl lg:text-2xl text-orange-500   p-4">
               Our market research services include:
             </h3>
             <ul className="list-disc list-inside mt-4 space-y-2 text-sm md:text-base lg:text-lg">
-              <li>Design and coordinate national surveys </li>
-              <li>
-                Conducting scoping studies and supporting the design of
-                interventions
-              </li>
-              <li>Market Segmentation Research</li>
-              <li>Customer Satisfaction survey</li>
-              <li>Pricing Research</li>
+              <li>Consumer surveys focusing on demand and supply</li>
+              <li>Market Segmentation and profiling Leaning needs assessment</li>
+              <li>Market diagnostic studies</li>
+              <li>Consumer Behaviour Analysis</li>
             </ul>
 
             <ul className="list-disc list-inside mt-4 space-y-2 text-sm md:text-base lg:text-lg">
-              <li>Human-Centered Research and Persona Analysis</li>
-              <li>Econometric and Causal Analysis</li>
-              <li>Digital economy research </li>
-              <li>Randomized Control trial study design and analysis </li>
+              <li>Brand Health Tracking</li>
+              <li>Pricing Research</li>
+              <li>Public Opinion Research</li>
+              <li>Economic Impact Studies</li>
             </ul>
           </div>
         </section>

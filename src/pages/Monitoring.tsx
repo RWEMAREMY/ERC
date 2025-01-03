@@ -10,11 +10,12 @@ function Monitoring() {
         <section className="bg-gray-100 py-12">
           <div className="flex max-w-6xl mx-auto px-4 md:px-0 gap-10 flex-col md:flex-row">
             <h2 className="text-sm md:text-md lg:text-lg text-[#043873]">
-              Econometer Research Center supports governments and development
-              partners generate and analyze data for research, impact
-              assessments and monitoring, evaluation, and learning.
+              Across disciplines and around the world, ERC helps development
+              organizations and their beneficiaries ensure program
+              accountability, measure impact, and use best practices and
+              insights to improve program effectiveness.
             </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl text-xs md:text-sm lg:text-base">
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl md:text-sm lg:text-xl">
               At ERC, we offer end-to-end Monitoring and Evaluation (M&E)
               services designed to help you optimize the success and impact of
               your projects and programs. Whether you're looking to enhance
@@ -73,7 +74,7 @@ function Monitoring() {
             </div>
           </div>
         </section> */}
-        
+
         <section className="relative">
           <img
             src={globe}
@@ -83,32 +84,28 @@ function Monitoring() {
           <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
             <h2 className="text-white text-lg sm:text-sm md:text-lg lg:text-xl text-center px-4">
               Econometer Research Center specializes in quantitative and
-              qualitative data collection for development in East Africa.
+              qualitative data collection for development.
             </h2>
           </div>
         </section>
 
         <section className="flex justify-center items-center text-[#043873] py-8 gap-10 p-4 flex-col md:flex-row">
           <div className="flex bg-[#043873] items-center justify-center rounded w-full md:w-1/2 h-56 p-4">
-            <h3 className="text-lg sm:text-md md:text-xl text-white">
-              How we can support you
+            <h3 className="text-xl sm:text-md md:text-xl text-orange-500 ">
+              How we can support you?
             </h3>
           </div>
           <div>
             <ul className="list-disc list-inside space-y-2 text-[#043873] font-bold text-xs md:text-sm lg:text-base">
               <li>
-                Baseline and endline surveys for evaluations and impact
-                evaluations
+                Baseline and endline surveys.
               </li>
               <li>
-                Business perception surveys including for taxpayers and
-                investors
+                Impact assessments.
               </li>
-              <li>
-                Smallholder farmer surveys and focus group discussions for value
-                chain analysis
-              </li>
-              <li>Impact modeling and assessments for development partners</li>
+              <li>Lesson learnt.</li>
+              <li>Gender & youth mainstreaming.</li>
+              <li>Randomized control trials (RCT).</li>
             </ul>
           </div>
         </section>
