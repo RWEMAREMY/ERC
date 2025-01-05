@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 
 interface FormData {
   fullName: string;
@@ -19,7 +18,6 @@ interface FormErrors {
 }
 
 const MiddleSix: React.FC = () => {
-  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
