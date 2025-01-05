@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,8 +21,6 @@ interface FormErrors {
 const MiddleSix: React.FC = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [email] = useState(""); // State for email
-  const [emailError] = useState(""); // State for email error message
   const sectionRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -50,7 +48,6 @@ const MiddleSix: React.FC = () => {
 
     return () => {
       if (sectionRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(sectionRef.current);
       }
     };
@@ -131,11 +128,6 @@ const MiddleSix: React.FC = () => {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function handleEmailChange(_event: ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div
       ref={sectionRef}
@@ -163,30 +155,6 @@ const MiddleSix: React.FC = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-<<<<<<< HEAD
-          <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 gap-4">
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full sm:w-1/2 p-4 rounded bg-white text-gray-800 focus:outline-none"
-            />
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              className="w-full sm:w-1/2 p-4 rounded bg-white text-gray-800 focus:outline-none"
-            />
-            <div className="w-full sm:w-1/2">
-              <input
-                type="email"
-                placeholder="example@gmail.com"
-                className="w-full p-4 rounded bg-white text-gray-800 focus:outline-none"
-                required // Marked as required
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                value={email} // Bind email state
-                onChange={handleEmailChange} // Handle email change
-              />
-              {emailError && <p className="text-red-500 text-sm mt-2">{emailError}</p>} {/* Error message in red */}
-=======
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <input
@@ -217,7 +185,6 @@ const MiddleSix: React.FC = () => {
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
               )}
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
             </div>
           </div>
 
@@ -228,27 +195,14 @@ const MiddleSix: React.FC = () => {
               value={formData.companyName}
               onChange={handleInputChange}
               placeholder="Company Name"
-<<<<<<< HEAD
-              className="w-full p-4 rounded bg-white text-gray-800 focus:outline-none"
-              required // Marked as required
-=======
               className={`w-full p-3 md:p-4 rounded bg-white text-gray-800 focus:outline-none ${
                 errors.companyName ? "border-2 border-red-500" : ""
               }`}
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
             />
             {errors.companyName && (
               <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>
             )}
           </div>
-<<<<<<< HEAD
-          <textarea
-            placeholder="Message"
-            className="w-full p-4 mt-4 rounded bg-white text-gray-800 focus:outline-none"
-            rows={4}
-            required // Marked as required
-          ></textarea>
-=======
 
           <div>
             <textarea
@@ -266,7 +220,6 @@ const MiddleSix: React.FC = () => {
             )}
           </div>
 
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
           <button
             type="submit"
             disabled={isSubmitting}
@@ -277,14 +230,10 @@ const MiddleSix: React.FC = () => {
         </form>
       </div>
 
-      <div
-<<<<<<< HEAD
-        className={`absolute bottom-0 w-full py-10 bg-white text-gray-800 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-=======
+      {/* <div
         className={`w-full bg-white text-gray-800 py-6 md:py-8 rounded-lg transition-all duration-1000 ease-out ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
       >
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
@@ -305,7 +254,7 @@ const MiddleSix: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

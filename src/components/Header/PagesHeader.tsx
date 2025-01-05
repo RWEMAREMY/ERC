@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/Images/ERCDOCLOGO.png";
-=======
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/Logos/Photoroom.png";
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 import Layout from "../../pages/Layout";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import backgroundImage from "../../assets/Images/Back.png";

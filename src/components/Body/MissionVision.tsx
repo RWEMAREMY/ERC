@@ -58,17 +58,14 @@ function MissionVision() {
             <div>
               <p className="text-left text-gray-700 leading-relaxed">
                 Our mission is to provide innovative, data-driven research and
-                advisory services that empower informed decision-making and
-                support the establishment, management, and evaluation of
-                impactful international development programs. We focus on
-                creating and implementing homegrown solutions to address the
-                challenges faced by populations on their journey toward
-                sustainable and inclusive prosperity. By harnessing local
-                knowledge and emphasizing private sector development, we aim to
-                drive meaningful change, create jobs, and increase incomes,
-                fostering economic growth and resilience. Ultimately, we are
-                dedicated to promoting long-term development and enhancing the
-                quality of life in communities across Africa
+                advisory services that empower informed decision-making. We
+                focus on creating and implementing homegrown solutions to
+                address the challenges faced by populations on their journey
+                toward sustainable and inclusive prosperity. By harnessing local
+                knowledge, emphasizing private sector development, and utilizing
+                a market systems approach, we aim to drive meaningful change by
+                providing actionable insights. We are intentional about gender
+                equity in all that we do.
               </p>
             </div>
           </div>
@@ -101,8 +98,7 @@ function MissionVision() {
                 empowering stakeholders with data-driven insights that drive
                 sustainable development and resilience. We envision a future
                 where informed decisions transform challenges into opportunities
-                for impactful change. Econometer Research Center can help you
-                understand your market and grow your business in East Africa.
+                for impactful change. 
               </p>
             </div>
           </div>

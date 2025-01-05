@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
-import Logo from "../../assets/Images/ERCDOCLOGO.png";
-=======
 import Logo from "../../assets/Logos/Photoroom.png"
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {

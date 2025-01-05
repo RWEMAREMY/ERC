@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import React, { FormEvent, useState } from "react"; // Added import for useState
-import Logo from "../../assets/Images/ERCDOCLOGO.png";
-import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-=======
 import Logo from "../../assets/Logos/Photoroom.png";
 import { useNavigate } from "react-router-dom";
 import { useState, FormEvent } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 
 interface LoginCredentials {
   email: string;
@@ -34,7 +26,6 @@ interface LoginResponse {
     lastLogin: string;
   };
 }
-
 const LoginComponent = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<LoginCredentials>({
@@ -42,11 +33,6 @@ const LoginComponent = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-<<<<<<< HEAD
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [error, setError] = useState<string | null>(null); 
-=======
   const [errors, setErrors] = useState({
     email: "",
     password: "",
@@ -66,7 +52,6 @@ const LoginComponent = () => {
         return "";
     }
   };
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -79,22 +64,10 @@ const LoginComponent = () => {
       ...prev,
       [id]: validateInput(id, value),
     }));
-
-    // Validate email and password on change
-    if (id === 'email') {
-      setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)); // Simple email regex
-    } else if (id === 'password') {
-      setIsPasswordValid(value.length >= 8); // Example password validation
-    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-<<<<<<< HEAD
-    setIsLoading(true);
-    setError(null); // Reset error state
-=======
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
 
     const emailError = validateInput("email", credentials.email);
     const passwordError = validateInput("password", credentials.password);
@@ -135,27 +108,17 @@ const LoginComponent = () => {
         isLoading: false,
         autoClose: 2000,
       });
-<<<<<<< HEAD
-      setTimeout(() => {
-        window.location.href = 'https://erc-dashboard-one.vercel.app'; 
-=======
 
       setTimeout(() => {
         const dashboardUrl = new URL("http://localhost:5174");
         dashboardUrl.searchParams.append("token", data.token);
         dashboardUrl.searchParams.append("user", JSON.stringify(data.user));
         window.location.href = dashboardUrl.toString();
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
       }, 2000);
     } catch (err) {
-<<<<<<< HEAD
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred during login';
-      setError(errorMessage); 
-=======
       console.error("Login error:", err);
       const errorMessage =
         err instanceof Error ? err.message : "An error occurred during login";
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
       toast.update(loadingToast, {
         render: errorMessage,
         type: "error",
@@ -213,16 +176,6 @@ const LoginComponent = () => {
           <p className="text-gray-300">Admin</p>
         </div>
 
-<<<<<<< HEAD
-        {/* Error message display */}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
-            <span className="block sm:inline">{error}</span>
-          </div>
-        )}
-
-=======
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
         <form className="space-y-14 mt-8 p-8" onSubmit={handleSubmit}>
           <div className="relative">
             <label className="block text-gray-300 text-sm mb-2" htmlFor="email">
@@ -238,14 +191,8 @@ const LoginComponent = () => {
               } bg-transparent text-white outline-none focus:border-blue-500`}
               placeholder="Enter your email"
             />
-<<<<<<< HEAD
-            {/* Validation message for email */}
-            {!isEmailValid && (
-              <p className="text-red-500 text-xs mt-1">Please enter a valid email address.</p>
-=======
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
             )}
           </div>
 
@@ -266,14 +213,8 @@ const LoginComponent = () => {
               } bg-transparent text-white outline-none focus:border-blue-500`}
               placeholder="Enter your email"
             />
-<<<<<<< HEAD
-            {/* Validation message for password */}
-            {!isPasswordValid && (
-              <p className="text-red-500 text-xs mt-1">Password must be at least 8 characters long.</p>
-=======
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
->>>>>>> 27667019b21f31a5016d23bc90460982359bf030
             )}
           </div>
           <button
