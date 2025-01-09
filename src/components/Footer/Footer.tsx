@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                 : "opacity-0 -translate-y-10"
             }`}
           >
-            <img src={Logo} alt="Profile" className="w-28 h-26" />
+            <img src={Logo} alt="Profile" className="w-[200px] h-14" />
           </div>
 
           <div

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import cover from "../../assets/Images/cover-2.png";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; 
 
 interface FormData {
   fullName: string;

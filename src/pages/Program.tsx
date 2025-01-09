@@ -1,13 +1,12 @@
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/PagesHeader";
 import magnifier from "../assets/Images/magnifier.jpg";
-import food from "../assets/Images/food.jpg";
-import Nutri1 from "../assets/Images/Nutri-1.jpg";
+import food from "../assets/Images/food.webp";
+import Nutri1 from "../assets/Images/Nutri-1.webp";
 import Nutri2 from "../assets/Images/Nutri-2.jpg";
 import Nutri3 from "../assets/Images/Nutri-3.jpg";
 import Nutri4 from "../assets/Images/Nutri-4.jpg";
 import Nutri5 from "../assets/Images/Nutri-5.jpg";
-
 
 
 function Program() {
